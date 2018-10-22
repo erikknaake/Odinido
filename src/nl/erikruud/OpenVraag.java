@@ -26,16 +26,16 @@ public class OpenVraag implements Vraag {
 
     @Override
     public ScoreVoorVraag getHuidigeScoreModel() {
-        return null;
+        return null; //TODO
     }
 
     @Override
     public int krijgScoreVoorAntwoord(GegevenAntwoord ga) {
-        return 0;
+        return 0; //TODO
     }
 
     @Override
     public Score geefScore() {
-        return null;
+        return null; //TODO
     }
 }

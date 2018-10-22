@@ -27,7 +27,7 @@ public class Docent {
     }
     public Lokaal selecteerLokaal(){
         //TODO
-        return new Lokaal();
+        return new Lokaal(0);
     }
     public Calendar selecteerMaximumDeelnameDuur(){
         //TODO
@@ -39,7 +39,7 @@ public class Docent {
     }
     public Lokaal getStandaardLokaal(){
         //TODO
-        return new Lokaal();
+        return new Lokaal(0);
     }
     public Calendar selecteerTijdOpen(){
         //TODO
