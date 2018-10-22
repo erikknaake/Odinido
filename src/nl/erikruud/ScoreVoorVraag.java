@@ -16,7 +16,6 @@ public class ScoreVoorVraag {
         return 0;
     }
     public int getScore(){
-        //TODO
-        return 0;
+        return score.getScore();
     }
 }

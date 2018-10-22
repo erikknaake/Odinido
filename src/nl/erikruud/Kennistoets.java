@@ -14,12 +14,10 @@ public class Kennistoets {
         return 0;
     }
     public String getToetscode(){
-        //TODO
-        return new String();
+        return toetsCode;
     }
     public String getTitel(){
-        //TODO
-        return new String();
+        return toetsTitel;
     }
     public void stelVraag(int vraagnr){
         //TODO

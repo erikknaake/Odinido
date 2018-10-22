@@ -8,7 +8,6 @@ public class Score {
      * @return een score
      */
     public int getScore(){
-        //TODO
-        return 0;
+        return score;
     }
 }

@@ -5,11 +5,6 @@ import java.util.List;
 public class Odinido {
     private List<Docent> docenten;
 
-    public static void main(String[] args) {
-	// write your code here
-        System.out.println("Hello World");
-    }
-
     /**
      * Stelt een kennistoets beschikbaar voor studenten
      * @param toetscode de code van de toets die moet worden open gesteld
