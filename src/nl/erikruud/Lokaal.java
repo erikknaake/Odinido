@@ -22,4 +22,7 @@ public class Lokaal {
     public void voegToetsuitvoeringToe(Toetsuitvoering tu){
         //TODO
     }
+    public int getLokaalNummer(){
+        return lokaalNummer;
+    }
 }

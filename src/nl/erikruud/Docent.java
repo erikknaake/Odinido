@@ -22,8 +22,19 @@ public class Docent {
     public void haalUitslagOverzichtOp(){
         //TODO
     }
-    public void getLokaal(int lokaalNummer){
-        //TODO
+
+    /**
+     * Haalt een lokaal op, op basis van een lokaalnummer
+     * @param lokaalNummer het nummer van het op te halen lokaal
+     * @return het opgehaalde lokaal
+     */
+    public Lokaal getLokaal(int lokaalNummer){
+        for(Lokaal l : lokalen){
+            if(l.getLokaalNummer() == lokaalNummer){
+                return l;
+            }
+        }
+        return null;
     }
     public Lokaal selecteerLokaal(){
         //TODO

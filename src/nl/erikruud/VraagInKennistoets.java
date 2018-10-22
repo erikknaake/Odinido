@@ -12,6 +12,11 @@ public class VraagInKennistoets {
         //TODO
         return new Score();
     }
+
+    /**
+     * Haalt de vraag op behorende bij deze instantie
+     * @return een vraag die hoort bij een kennistoets
+     */
     public String getVraag(){
         //TODO
         return new String();
