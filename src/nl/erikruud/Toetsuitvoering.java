@@ -10,8 +10,11 @@ public class Toetsuitvoering {
     private Kennistoets kennistoets;
     private List<Toetsdeelname> toetsDeelnames;
 
-    public Toetsuitvoering(){
-        toetsDeelnames = new ArrayList<>();
+    public Toetsuitvoering(Kennistoets k, Calendar t1, Calendar t2){
+        this.toetsDeelnames = new ArrayList<>();
+        this.startTijd = t1;
+        this.looptijd = t2;
+        this.kennistoets = k;
     }
 
     public String getUitslagOverzicht(){
@@ -22,9 +25,6 @@ public class Toetsuitvoering {
         //TODO
     }
     public void addToOverzicht(float r, int bonus, String naam){
-        //TODO
-    }
-    public void Toetsuitvoering(Kennistoets k, Calendar t1, Calendar t2){
         //TODO
     }
 
