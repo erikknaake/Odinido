@@ -1,6 +1,5 @@
 package nl.erikruud;
 
-import com.sun.xml.internal.bind.v2.TODO;
 
 import java.util.Calendar;
 import java.util.List;
@@ -20,17 +19,22 @@ public class Toetsdeelname {
         //TODO
         return 0;
     }
+
+    /**
+     * Koppeld een studentnaam aan deze toetsdeelname
+     * @param naam de studentNaam van de student aan wie deze deelname toebehoort
+     */
     public void voegDeelnemerToe(String naam){
-        //TODO
+        this.studentNaam = naam;
     }
     public void verhoogScore(int s){
         //TODO
     }
     public void verlaagVraagnr(){
-        //TODO
+        huidigeVraagNummer--;
     }
     public void verhoogVraagnr(){
-        //TODO
+        huidigeVraagNummer++;
     }
     public String krijgAntwoord(){
         //TODO
@@ -41,10 +45,9 @@ public class Toetsdeelname {
         return 0;
     }
     public void setEersteVraag(){
-        //TODO
+        huidigeVraagNummer = 0;
     }
     public String getNaamVanStudent(){
-        //TODO
-        return new String();
+        return studentNaam;
     }
 }

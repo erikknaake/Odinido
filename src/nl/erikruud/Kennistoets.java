@@ -13,9 +13,18 @@ public class Kennistoets {
         //TODO
         return 0;
     }
+
+    /**
+     * Geeft de toetscode behorende aan een kennistoets object
+     * @return de toetscode behorende bij de kennistoets
+     */
     public String getToetscode(){
         return toetsCode;
     }
+    /**
+     * Geeft de titel behorende aan een kennistoets object
+     * @return de titel behorende bij de kennistoets
+     */
     public String getTitel(){
         return toetsTitel;
     }

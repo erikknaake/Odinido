@@ -8,6 +8,7 @@ public class TijdsbonusVoorKennistoets {
     private Tijdsbonus tijdsbonus;
 
     public Tijdsbonus getHuidigeBonus(){
+        //TODO
         return new Tijdsbonus();
     }
     public int getbonus(Calendar tijd){

@@ -14,16 +14,19 @@ public class GeslotenVraag implements Vraag {
 
     @Override
     public ScoreVoorVraag getHuidigeScoreModel() {
+        //TODO
         return null;
     }
 
     @Override
     public int krijgScoreVoorAntwoord(GegevenAntwoord ga) {
+        //TODO
         return 0;
     }
 
     @Override
     public Score geefScore() {
+        //TODO
         return null;
     }
 }
