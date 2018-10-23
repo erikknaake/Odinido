@@ -54,7 +54,7 @@ public class Toetsdeelname {
     public void voegDeelnemerToe(String naam){
         this.studentNaam = naam;
         setEersteVraag();
-        while(huidigeVraagNummer < gesteldeVragen.size()) {
+        while(huidigeVraagNummer < gesteldeVragen.size()) { //TODO: tijd constriant
             System.out.println("Typ uw antwoord, of type t voor terug en v voor verder");
             gesteldeVragen.get(huidigeVraagNummer).stelVraag();
             Scanner s = new Scanner(System.in);
@@ -68,13 +68,10 @@ public class Toetsdeelname {
                 verhoogVraagnr();
                 continue;
             }
-            System.out.println(input);
-            //TODO: bounds check
             GegevenAntwoord ga;
             if(gesteldeVragen.get(huidigeVraagNummer).isOpenVraag()) {
-                String a = krijgAntwoord(input);
                 ga = new GegevenAntwoordOpenVraag();
-                ga.setGegevenAntwoord(a);
+                ga.setGegevenAntwoord(input);
             }
             else {
                 List<AntwoordGeslotenVraag> am = gesteldeVragen.get(huidigeVraagNummer).getAntwoordMogelijkheden();
@@ -86,7 +83,7 @@ public class Toetsdeelname {
             int sc = gesteldeVragen.get(huidigeVraagNummer).krijgScoreVoorAntwoord(ga);
             verhoogScore(sc);
             verhoogVraagnr();
-
+            //TODO aangeven wanneer klaar ipv wanneer laatste vraag is beantwoord
         }
     }
 
@@ -95,17 +92,14 @@ public class Toetsdeelname {
     }
 
     public void verlaagVraagnr(){
-        huidigeVraagNummer--;
+        if(huidigeVraagNummer > 0)
+            huidigeVraagNummer--;
     }
     public void verhoogVraagnr(){
-        huidigeVraagNummer++;
+        if(huidigeVraagNummer < gesteldeVragen.size())
+            huidigeVraagNummer++;
     }
 
-    public String krijgAntwoord(String input){
-//        System.out.println("Typ uw antwoord: ");
-//        return s.next();
-        return new String();
-    }
 
     public String krijgAntwoord(List<AntwoordGeslotenVraag> mogelijkheden, String input) {
         while(!isInputValid(mogelijkheden, input)) {

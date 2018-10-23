@@ -74,13 +74,16 @@ public class Docent {
         int input = Integer.MAX_VALUE;
         do {
             System.out.println("Geef een lokaal op");
+            for(Lokaal l : lokalen) {
+                System.out.println(l.getLokaalNummer());
+            }
             Scanner s = new Scanner(System.in);
             try {
                 input = s.nextInt();
             }
             catch (InputMismatchException e) { }
         } while (input > lokalen.size());
-        return lokalen.get(input - 1);
+        return lokalen.get(input - 1); //TODO: check if this works
     }
 
     /**
@@ -119,7 +122,7 @@ public class Docent {
      * @return het moment waarop toegang tot de kennistoetsuitvoering wordt afgesloten
      */
     public Calendar selecteerTijdOpen(){
-        System.out.println("Type de tijd dat de toets open blijft staan"); //TODO: print keuze lijst
+        System.out.println("Type de tijd dat de toets open blijft staan");
         return inputTijd();
     }
 
@@ -137,7 +140,6 @@ public class Docent {
             try {
                 cal.setTime(dateFormat.parse(s.next()));
             } catch (ParseException e) {
-                e.printStackTrace();
                 ex = e;
                 System.out.println("Dat is geen correcte tijd");
             }
@@ -159,7 +161,6 @@ public class Docent {
     }
 
     public void startKennistoets(String toetscode){
-        //TODO: check of toetscode bestaat + mogelijkheden geven
         Kennistoets k = getKennistoets(toetscode);
         Lokaal l;
         if(isPremiumDocent) {
@@ -179,5 +180,14 @@ public class Docent {
      */
     public String getDocentcode(){
         return docentCode;
+    }
+
+
+    public List<Kennistoets> getKennistoetsen() {
+        return kennistoetsen;
+    }
+
+    public List<Lokaal> getLokalen() {
+        return lokalen;
     }
 }

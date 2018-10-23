@@ -1,9 +1,6 @@
 package nl.erikruud;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Odinido {
     private List<Docent> docenten;
@@ -15,7 +12,7 @@ public class Odinido {
         List<TijdsbonusVoorKennistoets> tijdsbonussenVoorKennistoets = new ArrayList<>();
         Calendar cal1 = Calendar.getInstance(), cal2 = Calendar.getInstance();
         cal1.set(2018, Calendar.OCTOBER, 23, 16, 34);
-        cal2.set(2018, Calendar.OCTOBER, 23, 16, 40);
+        cal2.set(2018, Calendar.OCTOBER, 24, 16, 40);
         tijdsbonussenVoorKennistoets.add(new TijdsbonusVoorKennistoets(cal1, cal2, new Tijdsbonus(2)));
         List<Vraag> vragen = new ArrayList<>();
         List<ScoreVoorVraag> scoresVoorVraag = new ArrayList<>();
@@ -29,6 +26,7 @@ public class Odinido {
         vragen.add(new GeslotenVraag(scoresVoorVraag, "Is dit te veel werk?", new AntwoordGeslotenVraag("Ja"), onjuisteAntwoorden));
         List<VraagInKennistoets> vragenInKennistoets1 = new ArrayList<>();
         vragenInKennistoets1.add(new VraagInKennistoets(1, vragen.get(0)));
+        vragenInKennistoets1.add(new VraagInKennistoets(2, vragen.get(1)));
         List<Kennistoets> kennistoetsen1 = new ArrayList<>();
         kennistoetsen1.add(new Kennistoets("dea", "programmeeropdracht", tijdsbonussenVoorKennistoets, vragenInKennistoets1));
         docenten = new ArrayList<>();
@@ -114,11 +112,7 @@ public class Odinido {
             Scanner s = new Scanner(System.in);
             String input = s.next();
             if (input.equals("h")) {
-                System.out.println("Voer het lokaalnummer in");
-                int lokaalNummer = s.nextInt();
-                System.out.println("Voer uw docentcode in");
-                String code = s.next();
-                haalUitslagOverzichtOp(lokaalNummer, code);
+                haalUitslagOverzichtOpMetInput(s);
             } else if (input.equals("n")) {
                 System.out.println("Voer het lokaalnummer in");
                 int lokaalNummer = s.nextInt();
@@ -132,14 +126,81 @@ public class Odinido {
                 String code = s.next();
                 registreerLokaal(lokaalNummer, code);
             } else if (input.equals("o")) {
-                System.out.println("Voer de toetscode in");
-                String toetsCode = s.next();
-                System.out.println("Voer uw docentcode in");
-                String code = s.next();
-                openKennistoets(toetsCode, code);
+                openKennisToetsMetInput(s);
             } else if (input.equals("q")) {
                 return;
             }
         }
+    }
+
+    private void haalUitslagOverzichtOpMetInput(Scanner s) {
+        System.out.println("Voer uw docentcode in");
+        Docent d = inputDocent(s);
+        System.out.println("Voer het lokaalnummer in");
+        List<Lokaal> lokalen = d.getLokalen();
+        System.out.println("Beschikbare lokalen: ");
+        for(Lokaal l : lokalen) {
+            System.out.println(l.getLokaalNummer());
+        }
+
+        int lokaalNummer = Integer.MAX_VALUE;
+        do {
+            try {
+                lokaalNummer = s.nextInt();
+            }
+            catch (InputMismatchException e) {
+                System.out.println("Dat is geen nummer");
+            }
+        } while(!lokaalnummerInLijst(lokaalNummer, lokalen));
+
+        haalUitslagOverzichtOp(lokaalNummer, d.getDocentcode());
+    }
+
+    private void openKennisToetsMetInput(Scanner s) {
+        System.out.println("Voer uw docentcode in");
+        Docent d = inputDocent(s);
+        List<Kennistoets> kennistoetsen = d.getKennistoetsen();
+        System.out.println("Beschikbare toetsen: ");
+        for(Kennistoets k : kennistoetsen) {
+            System.out.println(k.getToetscode());
+        }
+
+        String toetsCode = inputToetsCode(s, kennistoetsen);
+        openKennistoets(toetsCode, d.getDocentcode());
+    }
+
+    private String inputToetsCode(Scanner s, List<Kennistoets> kennistoetsen) {
+        String toetsCode = "";
+        do {
+            System.out.println("Voer de toetscode in");
+            toetsCode = s.next();
+        }
+        while (!kennisToetscodeIsInLijst(toetsCode, kennistoetsen));
+        return toetsCode;
+    }
+
+    private Docent inputDocent(Scanner s) {
+        Docent d = null;
+        while(d == null) {
+            String code = s.next();
+            d = getDocent(code);
+        }
+        return d;
+    }
+
+    private boolean kennisToetscodeIsInLijst(String toetsCode, List<Kennistoets> kennistoetsen) {
+        for(Kennistoets k : kennistoetsen) {
+            if(toetsCode.equals(k.getToetscode()))
+                return true;
+        }
+        return false;
+    }
+
+    private boolean lokaalnummerInLijst(int lokaalnummer, List<Lokaal> lokalen) {
+        for(Lokaal l : lokalen) {
+            if(l.getLokaalNummer() == lokaalnummer)
+                return true;
+        }
+        return false;
     }
 }

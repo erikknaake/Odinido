@@ -21,13 +21,14 @@ public class Toetsuitvoering {
 
     public String getUitslagOverzicht(){
         overzicht = "";
+        addToOverzicht(kennistoets.getTitel(), kennistoets.getToetscode());
         for(Toetsdeelname td : toetsDeelnames) {
             float r = td.geefTotaalscore();
             Calendar tijd = td.getTijdOver();
             int bonus = kennistoets.getTijdsbonus(tijd);
             addToOverzicht(r, bonus, td.getNaamVanStudent());
         }
-        addToOverzicht(kennistoets.getTitel(), kennistoets.getToetscode());
+
         return overzicht;
     }
 
@@ -36,7 +37,7 @@ public class Toetsuitvoering {
     }
 
     public void addToOverzicht(float r, int bonus, String naam){
-        overzicht += (naam + ": " + r + " " + bonus + "Totaal: " + (r + bonus));
+        overzicht += (naam + ":\n\tScore: " + r + "\n\t" + bonus + "\n\tTotaal: " + (r + bonus) + "\n");
     }
 
     /**

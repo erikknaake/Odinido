@@ -21,7 +21,11 @@ public class GeslotenVraag extends Vraag {
     public int krijgScoreVoorAntwoord(GegevenAntwoord ga) {
         AntwoordGeslotenVraag agv = getJuistAntwoord();
         if(agv.isAntwoordJuist(ga)) {
-            return getHuidigeScoreModel().getScore();
+            ScoreVoorVraag svv = getHuidigeScoreModel();
+            if(getHuidigeScoreModel() != null)
+                return getHuidigeScoreModel().getScore();
+            else
+                System.out.println("Kon geen score model laden");
         }
         return 0;
     }
@@ -35,6 +39,10 @@ public class GeslotenVraag extends Vraag {
 
     @Override
     public void printExtra() {
-        System.out.println(getAntwoordMogelijkheden());
+        int i = 0;
+        for(AntwoordGeslotenVraag mogelijkheid : getAntwoordMogelijkheden()) {
+            System.out.println(i + ": " + mogelijkheid.getTekst());
+            i++;
+        }
     }
 }
