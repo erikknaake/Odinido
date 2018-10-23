@@ -5,6 +5,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+/**
+ * Een docent is een actor binnen het systeem die kennistoetsen en lokalen beheerd en kennistoetsen kan starten in
+ * lokalen die aan hem of haar toebehoren
+ */
 public class Docent {
     private String email;
     private String voornaam;

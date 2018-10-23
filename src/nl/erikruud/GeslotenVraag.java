@@ -3,18 +3,32 @@ package nl.erikruud;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Een gesloten vraag is een vraag met een vastgesteld aantal antwoordmogelijkheden
+ */
 public class GeslotenVraag extends Vraag {
     private AntwoordGeslotenVraag goedAntwoordGeslotenVraag;
     private List<AntwoordGeslotenVraag> foutAntwoordGeslotenVraag;
 
-    public AntwoordGeslotenVraag getJuistAntwoord(){
-        return goedAntwoordGeslotenVraag;
-    }
-
+    /**
+     * Maakt een nieuwe gesloten vraag aan op basis van de meegegeven informatie
+     * @param scoresVoorVraag de score die wordt toegekend bij het goed beantwoorden van de vraag
+     * @param tekst de tekst van de vraag
+     * @param goedAntwoordGeslotenVraag het juiste antwoord op de vraag
+     * @param foutAntwoordGeslotenVraag een verzameling met foute anwoorden
+     */
     public GeslotenVraag(List<ScoreVoorVraag> scoresVoorVraag, String tekst, AntwoordGeslotenVraag goedAntwoordGeslotenVraag, List<AntwoordGeslotenVraag> foutAntwoordGeslotenVraag) {
         super(scoresVoorVraag, tekst);
         this.goedAntwoordGeslotenVraag = goedAntwoordGeslotenVraag;
         this.foutAntwoordGeslotenVraag = foutAntwoordGeslotenVraag;
+    }
+
+    /**
+     * Geeft het juiste antwoord op een gesloten vraag
+     * @return het juiste antwoord
+     */
+    public AntwoordGeslotenVraag getJuistAntwoord(){
+        return goedAntwoordGeslotenVraag;
     }
 
     @Override
