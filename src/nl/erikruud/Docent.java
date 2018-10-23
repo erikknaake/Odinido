@@ -1,9 +1,12 @@
 package nl.erikruud;
 
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Scanner;
 
 public class Docent {
     private String email;
@@ -56,8 +59,7 @@ public class Docent {
      * @return het geselecteerde lokaal
      */
     public Lokaal selecteerLokaal(){
-        //TODO
-        return new Lokaal(0);
+        return lokalen.get(0);
     }
 
     /**
@@ -65,8 +67,7 @@ public class Docent {
      * @return de maximale tijd dat een student over de kennistoets mag doen
      */
     public Calendar selecteerMaximumDeelnameDuur(){
-        //TODO
-        return Calendar.getInstance();
+        return inputTijd();
     }
 
     /**
@@ -88,7 +89,6 @@ public class Docent {
      * @return een lokaal
      */
     public Lokaal getStandaardLokaal(){
-        //TODO
         return new Lokaal(0);
     }
 
@@ -97,13 +97,32 @@ public class Docent {
      * @return het moment waarop toegang tot de kennistoetsuitvoering wordt afgesloten
      */
     public Calendar selecteerTijdOpen(){
-        //TODO
-        return Calendar.getInstance();
+        return inputTijd();
     }
 
-    public void registreerLokaal(int lokaalNummer){
-        //TODO
+    /**
+     * Vraagt een tijd op via console input
+     * @return Calendar representatie van tijd
+     */
+    private Calendar inputTijd() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm:ss");
+        Scanner s = new Scanner(System.in);
+        Calendar cal = Calendar.getInstance();
+        try {
+            cal.setTime(dateFormat.parse(s.next()));
+        }
+        catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return cal;
     }
+
+    public void registreerLokaal(int lokaalNummer) {
+        Lokaal l = new Lokaal(lokaalNummer);
+        addLokaal(l);
+    }
+
+
     public void addLokaal(Lokaal l){
         lokalen.add(l);
     }

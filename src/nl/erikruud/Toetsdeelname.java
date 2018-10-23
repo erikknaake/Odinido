@@ -1,15 +1,25 @@
 package nl.erikruud;
 
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Scanner;
 
 public class Toetsdeelname {
     private Calendar startTijd;
-    private Calendar loopTijd;
+    //private Calendar loopTijd;
     private String studentNaam;
     private int huidigeVraagNummer;
     private List<GesteldeVraag> gesteldeVragen;
+
+    private float totaalScore;
+
+    public Toetsdeelname() {
+        totaalScore = 0;
+        gesteldeVragen = new ArrayList<>();
+        startTijd = Calendar.getInstance();
+    }
 
     /**
      * Vindt het verschil tussen de huidige tijd en de starttijd van de deelname
@@ -56,7 +66,7 @@ public class Toetsdeelname {
     }
 
     public void verhoogScore(int s){
-        //TODO
+        totaalScore += s;
     }
 
     public void verlaagVraagnr(){
@@ -65,19 +75,35 @@ public class Toetsdeelname {
     public void verhoogVraagnr(){
         huidigeVraagNummer++;
     }
+
     public String krijgAntwoord(){
-        //TODO
-        return new String();
+        Scanner s = new Scanner(System.in);
+        System.out.println("Typ uw antwoord: ");
+        return s.next();
     }
-    public String krijgAntwoord(List<AntwoordGeslotenVraag> mogelijkheden){
-        //TODO
-        return new String();
-    }
-    public float geefTotaalscore(){
-        float totaalScore = 0;
-        for(GesteldeVraag gv : gesteldeVragen) {
-            totaalScore += gv.getScore();
+    public String krijgAntwoord(List<AntwoordGeslotenVraag> mogelijkheden) {
+        String input = "";
+        System.out.println("Typ uw antwoord: ");
+        while(!isInputValid(mogelijkheden, input)) {
+            Scanner s = new Scanner(System.in);
         }
+        return input;
+    }
+
+    private boolean isInputValid(List<AntwoordGeslotenVraag> mogelijkheden, String antwoord) {
+        for(AntwoordGeslotenVraag a : mogelijkheden) {
+            if(a.getTekst().equals(antwoord)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public float geefTotaalscore(){
+//        float totaalScore = 0;
+//        for(GesteldeVraag gv : gesteldeVragen) {
+//            totaalScore += gv.getScore();
+//        }
         return totaalScore;
     }
 

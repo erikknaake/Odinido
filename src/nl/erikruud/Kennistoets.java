@@ -6,11 +6,14 @@ import java.util.List;
 public class Kennistoets {
     private String toetsCode;
     private String toetsTitel;
-    private TijdsbonusVoorKennistoets tijdsbonusVoorKennistoets;
+    private List<TijdsbonusVoorKennistoets> tijdsbonussenVoorKennistoets;
     private List<VraagInKennistoets> vragenInKennistoets;
 
-    public int getTijdsbonus(Calendar tijd){
-        //TODO
+    public int getTijdsbonus(Calendar tijdOver){
+        for(TijdsbonusVoorKennistoets tbvk : tijdsbonussenVoorKennistoets) {
+            if(tbvk.isHuidigeTijdsBonnus())
+                return tbvk.getbonus(tijdOver);
+        }
         return 0;
     }
 
