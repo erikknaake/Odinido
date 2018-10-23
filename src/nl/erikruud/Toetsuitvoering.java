@@ -9,7 +9,8 @@ import java.util.List;
  */
 public class Toetsuitvoering {
     private Calendar startTijd;
-    private Calendar looptijd;
+    private Calendar looptijd; //TODO: toets dicht zetten nadat tijd is verlopen
+    private Calendar looptijdStudent; //TODO: verwerken in DCD
     private Kennistoets kennistoets;
     private List<Toetsdeelname> toetsDeelnames;
     private String overzicht;
@@ -22,7 +23,8 @@ public class Toetsuitvoering {
      */
     public Toetsuitvoering(Kennistoets k, Calendar t1, Calendar t2){
         this.toetsDeelnames = new ArrayList<>();
-        this.startTijd = t1;
+        this.startTijd = Calendar.getInstance();
+        looptijdStudent = t1;
         this.looptijd = t2;
         this.kennistoets = k;
         overzicht = "";
@@ -69,7 +71,7 @@ public class Toetsuitvoering {
      * @param naam de naam van de student die wil deelnemen aan de toets
      */
     public void voegDeelnemerToe(String naam){
-        Toetsdeelname t = new Toetsdeelname(startTijd, looptijd, kennistoets);
+        Toetsdeelname t = new Toetsdeelname(Calendar.getInstance(), looptijdStudent, kennistoets);
         t.voegDeelnemerToe(naam);
         toetsDeelnames.add(t);
     }
