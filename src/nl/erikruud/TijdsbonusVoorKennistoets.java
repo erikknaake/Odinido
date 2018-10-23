@@ -7,6 +7,12 @@ public class TijdsbonusVoorKennistoets {
     private Calendar tot;
     private Tijdsbonus tijdsbonus;
 
+    public TijdsbonusVoorKennistoets(Calendar van, Calendar tot, Tijdsbonus tijdsbonus) {
+        this.van = van;
+        this.tot = tot;
+        this.tijdsbonus = tijdsbonus;
+    }
+
     public boolean isHuidigeTijdsBonnus() {
         return Calendar.getInstance().compareTo(van) > 0 && Calendar.getInstance().compareTo(tot) < 0;
     }

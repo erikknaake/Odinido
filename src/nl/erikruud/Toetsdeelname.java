@@ -15,11 +15,20 @@ public class Toetsdeelname {
 
     private float totaalScore;
 
-    public Toetsdeelname(Calendar startTijd, Calendar loopTijd) {
+    public Toetsdeelname(Calendar startTijd, Calendar loopTijd, Kennistoets k) {
         totaalScore = 0;
         gesteldeVragen = new ArrayList<>();
         this.loopTijd = loopTijd;
         this.startTijd = startTijd;
+        initGesteldeVragen(k);
+    }
+
+    private void initGesteldeVragen(Kennistoets k) {
+        gesteldeVragen = new ArrayList<>();
+        List<VraagInKennistoets> vragenInKennisToets = k.getVragenInKennistoets();
+        for(VraagInKennistoets vraagInKennistoets : vragenInKennisToets) {
+            gesteldeVragen.add(vraagInKennistoets.maakGesteldeVraag());
+        }
     }
 
     /**
@@ -32,6 +41,12 @@ public class Toetsdeelname {
         return cal;
     }
 
+    public Calendar getTijdOver() {
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.MILLISECOND, loopTijd.compareTo(getGebruikteTijd()));
+        return cal;
+    }
+
     /**
      * Koppelt een studentnaam aan deze toetsdeelname
      * @param naam de studentNaam van de student aan wie deze deelname toebehoort
@@ -39,11 +54,22 @@ public class Toetsdeelname {
     public void voegDeelnemerToe(String naam){
         this.studentNaam = naam;
         setEersteVraag();
-        while(huidigeVraagNummer < gesteldeVragen.size() && getGebruikteTijd().compareTo(loopTijd) < 0) {
+        while(huidigeVraagNummer < gesteldeVragen.size()) {
             System.out.println("Typ uw antwoord, of type t voor terug en v voor verder");
+            gesteldeVragen.get(huidigeVraagNummer).stelVraag();
             Scanner s = new Scanner(System.in);
-            String input = s.next();
+            String input = s.nextLine();
 
+            if(input.equals("t")) {
+                verlaagVraagnr();
+                continue;
+            }
+            else if(input.equals("v")) {
+                verhoogVraagnr();
+                continue;
+            }
+            System.out.println(input);
+            //TODO: bounds check
             GegevenAntwoord ga;
             if(gesteldeVragen.get(huidigeVraagNummer).isOpenVraag()) {
                 String a = krijgAntwoord(input);
@@ -59,13 +85,8 @@ public class Toetsdeelname {
             }
             int sc = gesteldeVragen.get(huidigeVraagNummer).krijgScoreVoorAntwoord(ga);
             verhoogScore(sc);
+            verhoogVraagnr();
 
-            if(input.equals("t")) {
-                verlaagVraagnr();
-            }
-            else if(input.equals("v")) {
-                verhoogVraagnr();
-            }
         }
     }
 
@@ -104,10 +125,10 @@ public class Toetsdeelname {
     }
 
     public float geefTotaalscore(){
-//        float totaalScore = 0;
-//        for(GesteldeVraag gv : gesteldeVragen) {
-//            totaalScore += gv.getScore();
-//        }
+        float totaalScore = 0;
+        for(GesteldeVraag gv : gesteldeVragen) {
+            totaalScore += gv.getScore();
+        }
         return totaalScore;
     }
 

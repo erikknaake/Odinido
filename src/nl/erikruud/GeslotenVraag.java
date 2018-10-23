@@ -11,6 +11,12 @@ public class GeslotenVraag extends Vraag {
         return goedAntwoordGeslotenVraag;
     }
 
+    public GeslotenVraag(List<ScoreVoorVraag> scoresVoorVraag, String tekst, AntwoordGeslotenVraag goedAntwoordGeslotenVraag, List<AntwoordGeslotenVraag> foutAntwoordGeslotenVraag) {
+        super(scoresVoorVraag, tekst);
+        this.goedAntwoordGeslotenVraag = goedAntwoordGeslotenVraag;
+        this.foutAntwoordGeslotenVraag = foutAntwoordGeslotenVraag;
+    }
+
     @Override
     public int krijgScoreVoorAntwoord(GegevenAntwoord ga) {
         AntwoordGeslotenVraag agv = getJuistAntwoord();

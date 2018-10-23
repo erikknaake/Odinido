@@ -3,10 +3,7 @@ package nl.erikruud;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Docent {
     private String email;
@@ -18,12 +15,27 @@ public class Docent {
     private List<Lokaal> lokalen;
     private List<Kennistoets> kennistoetsen;
 
-    public Docent(int lokaalNummer){
-        isPremiumDocent = false;
+    public Docent() {
         lokalen = new ArrayList<>();
         kennistoetsen = new ArrayList<>();
-        Lokaal l = new Lokaal(lokaalNummer);
-        lokalen.add(l);
+    }
+
+//    public Docent(int lokaalNummer){
+//        this();
+//        Lokaal l = new Lokaal(lokaalNummer);
+//        lokalen.add(l);
+//    }
+
+    public Docent(String email, String voornaam, String achternaam, String wachtwoord, String docentCode, boolean isPremiumDocent, List<Lokaal> lokalen, List<Kennistoets> kennistoetsen) {
+        this();
+        this.email = email;
+        this.voornaam = voornaam;
+        this.achternaam = achternaam;
+        this.wachtwoord = wachtwoord;
+        this.docentCode = docentCode;
+        this.isPremiumDocent = isPremiumDocent;
+        this.lokalen = lokalen;
+        this.kennistoetsen = kennistoetsen;
     }
 
     /**
@@ -59,7 +71,16 @@ public class Docent {
      * @return het geselecteerde lokaal
      */
     public Lokaal selecteerLokaal(){
-        return lokalen.get(0);
+        int input = Integer.MAX_VALUE;
+        do {
+            System.out.println("Geef een lokaal op");
+            Scanner s = new Scanner(System.in);
+            try {
+                input = s.nextInt();
+            }
+            catch (InputMismatchException e) { }
+        } while (input > lokalen.size());
+        return lokalen.get(input - 1);
     }
 
     /**
@@ -67,6 +88,7 @@ public class Docent {
      * @return de maximale tijd dat een student over de kennistoets mag doen
      */
     public Calendar selecteerMaximumDeelnameDuur(){
+        System.out.println("Typ hoelang een student maximaal over de toets mag doen");
         return inputTijd();
     }
 
@@ -89,7 +111,7 @@ public class Docent {
      * @return een lokaal
      */
     public Lokaal getStandaardLokaal(){
-        return new Lokaal(0);
+        return lokalen.get(0);
     }
 
     /**
@@ -97,6 +119,7 @@ public class Docent {
      * @return het moment waarop toegang tot de kennistoetsuitvoering wordt afgesloten
      */
     public Calendar selecteerTijdOpen(){
+        System.out.println("Type de tijd dat de toets open blijft staan"); //TODO: print keuze lijst
         return inputTijd();
     }
 
@@ -108,18 +131,26 @@ public class Docent {
         SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm:ss");
         Scanner s = new Scanner(System.in);
         Calendar cal = Calendar.getInstance();
-        try {
-            cal.setTime(dateFormat.parse(s.next()));
+        ParseException ex = null;
+        do{
+            ex = null;
+            try {
+                cal.setTime(dateFormat.parse(s.next()));
+            } catch (ParseException e) {
+                e.printStackTrace();
+                ex = e;
+                System.out.println("Dat is geen correcte tijd");
+            }
         }
-        catch (ParseException e) {
-            e.printStackTrace();
-        }
+        while(ex != null);
         return cal;
     }
 
     public void registreerLokaal(int lokaalNummer) {
         Lokaal l = new Lokaal(lokaalNummer);
         addLokaal(l);
+        System.out.println("Lokaal is toegevoegd");
+        //TODO check of het lokaal niet al bestaat
     }
 
 
@@ -128,6 +159,7 @@ public class Docent {
     }
 
     public void startKennistoets(String toetscode){
+        //TODO: check of toetscode bestaat + mogelijkheden geven
         Kennistoets k = getKennistoets(toetscode);
         Lokaal l;
         if(isPremiumDocent) {

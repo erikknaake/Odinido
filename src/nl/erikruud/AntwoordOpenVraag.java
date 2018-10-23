@@ -4,6 +4,10 @@ public class AntwoordOpenVraag {
 
     private String tekst;
 
+    public AntwoordOpenVraag(String tekst) {
+        this.tekst = tekst;
+    }
+
     /**
      * Controleert of het antwoord op een open vraag goed is
      * @param gv het gegeven antwoord

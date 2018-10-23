@@ -31,4 +31,8 @@ public class GesteldeVraag {
     public boolean isOpenVraag() {
         return vraagInKennistoets.getVraag() instanceof OpenVraag;
     }
+
+    public void stelVraag() {
+        vraagInKennistoets.getVraag().print();
+    }
 }

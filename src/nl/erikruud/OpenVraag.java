@@ -8,10 +8,12 @@ public class OpenVraag extends Vraag {
     private int antwoordMogelijkHeidIndex;
     private List<AntwoordOpenVraag> juisteAntwoorden;
 
-    public OpenVraag(){
+    public OpenVraag(List<ScoreVoorVraag> scoresVoorVraag, String tekst, List<AntwoordOpenVraag> juisteAntwoorden) {
+        super(scoresVoorVraag, tekst);
         resetAntwoordIndex();
-        juisteAntwoorden = new ArrayList<>();
+        this.juisteAntwoorden = juisteAntwoorden;
     }
+
 
     public AntwoordOpenVraag getAntwoordMogelijkeheid(int antwoordIndex){
         return juisteAntwoorden.get(antwoordIndex);

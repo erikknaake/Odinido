@@ -6,8 +6,11 @@ import java.util.List;
 public abstract class Vraag {
     private List<ScoreVoorVraag> scoresVoorVraag;
     private String tekst;
-    public Vraag() {
-        scoresVoorVraag = new ArrayList<>();
+
+
+    public Vraag(List<ScoreVoorVraag> scoresVoorVraag, String tekst) {
+        this.scoresVoorVraag = scoresVoorVraag;
+        this.tekst = tekst;
     }
 
     public ScoreVoorVraag getHuidigeScoreModel() {
@@ -22,7 +25,13 @@ public abstract class Vraag {
     public abstract int krijgScoreVoorAntwoord(GegevenAntwoord ga);
 
     public int geefScore() {
-        return getHuidigeScoreModel().getScore();
+        ScoreVoorVraag dvv = getHuidigeScoreModel();
+        if(getHuidigeScoreModel() != null)
+            return getHuidigeScoreModel().getScore();
+        else {
+            System.out.println("Kon geen beoordelingsmodel vinden");
+            return 0;
+        }
     }
 
     public abstract List<AntwoordGeslotenVraag> getAntwoordMogelijkheden();

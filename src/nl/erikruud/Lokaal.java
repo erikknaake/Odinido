@@ -22,7 +22,10 @@ public class Lokaal {
      * @param naam de naam van de student die deel wil nemen aan de toets in dit lokaal
      */
     public void voegDeelnemerToe(String naam) {
-        toetsuitvoering.voegDeelnemerToe(naam);
+        if(toetsuitvoering != null)
+            toetsuitvoering.voegDeelnemerToe(naam);
+        else
+            System.out.println("Lokaal staat niet open");
     }
 
     /**

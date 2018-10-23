@@ -6,6 +6,11 @@ public class VraagInKennistoets {
     private int volgnr;
     private Vraag vraag;
 
+    public VraagInKennistoets(int volgnr, Vraag vraag) {
+        this.volgnr = volgnr;
+        this.vraag = vraag;
+    }
+
     public int krijgScoreVoorAntwoord (GegevenAntwoord antwoord){
         return vraag.krijgScoreVoorAntwoord(antwoord);
     }
@@ -28,5 +33,9 @@ public class VraagInKennistoets {
 
     public List<AntwoordGeslotenVraag> getAntwoordMogelijkheden() {
         return vraag.getAntwoordMogelijkheden();
+    }
+
+    public GesteldeVraag maakGesteldeVraag() {
+        return new GesteldeVraag(this);
     }
 }

@@ -4,6 +4,10 @@ public class AntwoordGeslotenVraag {
 
     private String tekst;
 
+    public AntwoordGeslotenVraag(String tekst) {
+        this.tekst = tekst;
+    }
+
     /**
      * Controleert of het antwoord op een gesloten vraag goed is
      * @param gv het gegeven antwoord

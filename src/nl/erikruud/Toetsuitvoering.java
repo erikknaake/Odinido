@@ -23,7 +23,7 @@ public class Toetsuitvoering {
         overzicht = "";
         for(Toetsdeelname td : toetsDeelnames) {
             float r = td.geefTotaalscore();
-            Calendar tijd = td.getGebruikteTijd();
+            Calendar tijd = td.getTijdOver();
             int bonus = kennistoets.getTijdsbonus(tijd);
             addToOverzicht(r, bonus, td.getNaamVanStudent());
         }
@@ -44,7 +44,7 @@ public class Toetsuitvoering {
      * @param naam de naam van de student die wil deelnemen aan de toets
      */
     public void voegDeelnemerToe(String naam){
-        Toetsdeelname t = new Toetsdeelname(looptijd);
+        Toetsdeelname t = new Toetsdeelname(startTijd, looptijd, kennistoets);
         t.voegDeelnemerToe(naam);
         toetsDeelnames.add(t);
     }

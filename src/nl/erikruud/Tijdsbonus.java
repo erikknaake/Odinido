@@ -5,6 +5,10 @@ import java.util.Calendar;
 public class Tijdsbonus {
     private int bonusPerMinuutOver;
 
+    public Tijdsbonus(int bonusPerMinuutOver) {
+        this.bonusPerMinuutOver = bonusPerMinuutOver;
+    }
+
     /**
      * Berekend een tijdsbonus op basis van een vaste formule
      * @param tijdOver de tijd dat de student over de kennistoets heeft gedaan

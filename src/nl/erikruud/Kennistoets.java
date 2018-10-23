@@ -9,6 +9,16 @@ public class Kennistoets {
     private List<TijdsbonusVoorKennistoets> tijdsbonussenVoorKennistoets;
     private List<VraagInKennistoets> vragenInKennistoets;
 
+    public Kennistoets() {
+    }
+
+    public Kennistoets(String toetsCode, String toetsTitel, List<TijdsbonusVoorKennistoets> tijdsbonussenVoorKennistoets, List<VraagInKennistoets> vragenInKennistoets) {
+        this.toetsCode = toetsCode;
+        this.toetsTitel = toetsTitel;
+        this.tijdsbonussenVoorKennistoets = tijdsbonussenVoorKennistoets;
+        this.vragenInKennistoets = vragenInKennistoets;
+    }
+
     public int getTijdsbonus(Calendar tijdOver){
         for(TijdsbonusVoorKennistoets tbvk : tijdsbonussenVoorKennistoets) {
             if(tbvk.isHuidigeTijdsBonnus())
@@ -40,6 +50,10 @@ public class Kennistoets {
     public void stelVraag(int vraagnr){
         Vraag ov = vragenInKennistoets.get(vraagnr).getVraag();
         ov.print();
+    }
+
+    public List<VraagInKennistoets> getVragenInKennistoets() {
+        return vragenInKennistoets;
     }
 
 }

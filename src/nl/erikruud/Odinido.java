@@ -1,6 +1,7 @@
 package nl.erikruud;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Scanner;
 
@@ -8,7 +9,33 @@ public class Odinido {
     private List<Docent> docenten;
 
     public Odinido() {
+        List<Lokaal> lokalen1 = new ArrayList<>();
+        lokalen1.add(new Lokaal(1));
+        lokalen1.add(new Lokaal(2));
+        List<TijdsbonusVoorKennistoets> tijdsbonussenVoorKennistoets = new ArrayList<>();
+        Calendar cal1 = Calendar.getInstance(), cal2 = Calendar.getInstance();
+        cal1.set(2018, Calendar.OCTOBER, 23, 16, 34);
+        cal2.set(2018, Calendar.OCTOBER, 23, 16, 40);
+        tijdsbonussenVoorKennistoets.add(new TijdsbonusVoorKennistoets(cal1, cal2, new Tijdsbonus(2)));
+        List<Vraag> vragen = new ArrayList<>();
+        List<ScoreVoorVraag> scoresVoorVraag = new ArrayList<>();
+        scoresVoorVraag.add(new ScoreVoorVraag(cal1, cal2, new Score(2)));
+        List<AntwoordOpenVraag> juisteAntwoorden = new ArrayList<>();
+        juisteAntwoorden.add(new AntwoordOpenVraag("Om mensen bezig te houden"));
+        vragen.add(new OpenVraag(scoresVoorVraag, "Waarom wordt er zoveel gemockt?", juisteAntwoorden));
+        List<AntwoordGeslotenVraag> onjuisteAntwoorden = new ArrayList<>();
+        onjuisteAntwoorden.add(new AntwoordGeslotenVraag("Nee"));
+        onjuisteAntwoorden.add(new AntwoordGeslotenVraag("Het is heel weinig"));
+        vragen.add(new GeslotenVraag(scoresVoorVraag, "Is dit te veel werk?", new AntwoordGeslotenVraag("Ja"), onjuisteAntwoorden));
+        List<VraagInKennistoets> vragenInKennistoets1 = new ArrayList<>();
+        vragenInKennistoets1.add(new VraagInKennistoets(1, vragen.get(0)));
+        List<Kennistoets> kennistoetsen1 = new ArrayList<>();
+        kennistoetsen1.add(new Kennistoets("dea", "programmeeropdracht", tijdsbonussenVoorKennistoets, vragenInKennistoets1));
         docenten = new ArrayList<>();
+        Docent docent1 = new Docent("e.knaake@student.han.nl", "Erik", "Knaake", "P@ssword1", "ek", true, lokalen1, kennistoetsen1);
+        docenten.add(docent1);
+//        Docent docent2 = new Docent("r.hermans@student.han.nl", "Ruud", "Hermans", "root", "rh", false);
+//        docenten.add(docent2);
     }
 
     /**
@@ -73,6 +100,7 @@ public class Odinido {
             return;
         }
         l.voegDeelnemerToe(naam);
+        //TODO: check of het lokaal wel open staat
     }
 
     public void haalUitslagOverzichtOp(int lokaalNummer, String docentCode) {
