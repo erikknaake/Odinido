@@ -9,6 +9,10 @@ public class Lokaal {
     private int lokaalNummer;
     private Toetsuitvoering toetsuitvoering;
 
+    /**
+     * Maakt een nieuw lokaal aan op basis van de meegegeven informatie
+     * @param lokaalNummer het lokaalnummer voor het lokaal
+     */
     public Lokaal(int lokaalNummer){
         this.lokaalNummer = lokaalNummer;
     }
@@ -20,6 +24,13 @@ public class Lokaal {
     public String getUitslagOverzicht(){
         return toetsuitvoering.getUitslagOverzicht();
     }
+
+    /**
+     * Start de uitvoering van een kennistoets in het lokaal
+     * @param k de kennistoets die gestart wordt in het lokaal
+     * @param t1 de tijd dat de toets in dit lokaal open staat
+     * @param t2 de tijd die een student krijt na aanmelding om de toets te maken
+     */
     public void startKennistoets(Kennistoets k, Calendar t1, Calendar t2){
         Toetsuitvoering tu = new Toetsuitvoering(k, t1, t2);
         voegToetsuitvoeringToe(tu);

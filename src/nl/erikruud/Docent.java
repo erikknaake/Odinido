@@ -15,6 +15,9 @@ public class Docent {
     private List<Lokaal> lokalen;
     private List<Kennistoets> kennistoetsen;
 
+    /**
+     * Maakt een nieuwe docent aan en initialiseert de benodigde variabelen
+     */
     public Docent() {
         lokalen = new ArrayList<>();
         kennistoetsen = new ArrayList<>();
@@ -26,6 +29,17 @@ public class Docent {
 //        lokalen.add(l);
 //    }
 
+    /**
+     * Maakt een nieuwe docent aan op basis van de verstrekte informatie
+     * @param email het email adres van de docent
+     * @param voornaam de voornaam van de docent
+     * @param achternaam de achternaam van de docent
+     * @param wachtwoord het wachtwoord van de dccent
+     * @param docentCode de code van de docent
+     * @param isPremiumDocent of de docent een premium account heeft of niet
+     * @param lokalen een overzicht van lokalen dat aan de docent toebehoort
+     * @param kennistoetsen een overzicht van kennistoetsen dat aan de docent toebehoort
+     */
     public Docent(String email, String voornaam, String achternaam, String wachtwoord, String docentCode, boolean isPremiumDocent, List<Lokaal> lokalen, List<Kennistoets> kennistoetsen) {
         this();
         this.email = email;
@@ -168,6 +182,10 @@ public class Docent {
         lokalen.add(l);
     }
 
+    /**
+     * Start een kennistoets in een van de lokalen van de docent
+     * @param toetscode de code van de te starten kennistoets
+     */
     public void startKennistoets(String toetscode){
         Kennistoets k = getKennistoets(toetscode);
         Lokaal l;
@@ -190,11 +208,18 @@ public class Docent {
         return docentCode;
     }
 
-
+    /**
+     * Geeft inzage in de kennistoetsen die aan de docent toebehoren
+     * @return de kennistoetsen van de docent
+     */
     public List<Kennistoets> getKennistoetsen() {
         return kennistoetsen;
     }
 
+    /**
+     * Geeft inzage in de lokalen die aan de docent toebehoren
+     * @return de lokalen van de docent
+     */
     public List<Lokaal> getLokalen() {
         return lokalen;
     }

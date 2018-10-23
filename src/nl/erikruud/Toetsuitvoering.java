@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+/**
+ * Een toetsuitvoering is de uitvoering van een willekeurige toets binnen een lokaal
+ */
 public class Toetsuitvoering {
     private Calendar startTijd;
     private Calendar looptijd;
@@ -11,6 +14,12 @@ public class Toetsuitvoering {
     private List<Toetsdeelname> toetsDeelnames;
     private String overzicht;
 
+    /**
+     * Maakt een nieuwe toetsuitvoering aan op basis van de meegegeven informatie
+     * @param k de kennistoets waarvoor een uitvoering moet worden gestart
+     * @param t1 de tijd dat de uitvoering duurt
+     * @param t2 de tijd die een deelnemer aan de toets mag besteden
+     */
     public Toetsuitvoering(Kennistoets k, Calendar t1, Calendar t2){
         this.toetsDeelnames = new ArrayList<>();
         this.startTijd = t1;
