@@ -98,7 +98,6 @@ public class Odinido {
             return;
         }
         l.voegDeelnemerToe(naam);
-        //TODO: check of het lokaal wel open staat
     }
 
     public void haalUitslagOverzichtOp(int lokaalNummer, String docentCode) {

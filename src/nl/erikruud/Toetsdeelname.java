@@ -54,12 +54,16 @@ public class Toetsdeelname {
     public void voegDeelnemerToe(String naam){
         this.studentNaam = naam;
         setEersteVraag();
-        while(huidigeVraagNummer < gesteldeVragen.size()) { //TODO: tijd constriant
-            System.out.println("Typ uw antwoord, of type t voor terug en v voor verder");
+        String input = "";
+        //TODO: test tijd constraint
+        while(isErNogTijdOver()) {
+            System.out.println("Typ uw antwoord, of type t voor terug en v voor verder, type k als u klaar bent");
+            if(huidigeVraagNummer == gesteldeVragen.size() - 1) {
+                System.out.println("Dit is de laatste vraag, type k om te stoppen");
+            }
             gesteldeVragen.get(huidigeVraagNummer).stelVraag();
             Scanner s = new Scanner(System.in);
-            String input = s.nextLine();
-
+            input = s.nextLine();
             if(input.equals("t")) {
                 verlaagVraagnr();
                 continue;
@@ -68,6 +72,10 @@ public class Toetsdeelname {
                 verhoogVraagnr();
                 continue;
             }
+            else if(input.equals("k")) { //Geeft problemen om dit in de while conditie te zetten
+                break;
+            }
+
             GegevenAntwoord ga;
             if(gesteldeVragen.get(huidigeVraagNummer).isOpenVraag()) {
                 ga = new GegevenAntwoordOpenVraag();
@@ -83,8 +91,12 @@ public class Toetsdeelname {
             int sc = gesteldeVragen.get(huidigeVraagNummer).krijgScoreVoorAntwoord(ga);
             verhoogScore(sc);
             verhoogVraagnr();
-            //TODO aangeven wanneer klaar ipv wanneer laatste vraag is beantwoord
         }
+        System.out.println("Toets wordt ingeleverd...");
+    }
+
+    private boolean isErNogTijdOver() {
+        return getTijdOver().getTimeInMillis() > 0;
     }
 
     public void verhoogScore(int s){
@@ -103,7 +115,7 @@ public class Toetsdeelname {
      * Laat de index van de lijst met vragen verwijzen naar het volgende element
      */
     public void verhoogVraagnr(){
-        if(huidigeVraagNummer < gesteldeVragen.size())
+        if(huidigeVraagNummer < gesteldeVragen.size() - 1)
             huidigeVraagNummer++;
     }
 

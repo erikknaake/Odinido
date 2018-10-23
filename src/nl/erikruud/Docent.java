@@ -101,7 +101,7 @@ public class Docent {
             }
             catch (InputMismatchException e) { }
         } while (input > lokalen.size());
-        return lokalen.get(input - 1); //TODO: check if this works
+        return lokalen.get(input - 1);
     }
 
     /**
@@ -201,6 +201,7 @@ public class Docent {
         }
         Calendar t1 = selecteerTijdOpen();
         Calendar t2 = selecteerMaximumDeelnameDuur();
+        //TODO: gaat ergens mis in vertaal slag van looptijd naar eindtijd
         l.startKennistoets(k, t1, t2);
     }
 
