@@ -17,6 +17,11 @@ public class TijdsbonusVoorKennistoets {
         return Calendar.getInstance().compareTo(van) > 0 && Calendar.getInstance().compareTo(tot) < 0;
     }
 
+    /**
+     * Haalt de bonus op die op dit moment bij een kennistoets hoort
+     * @param tijdOver de tijd die de student over had
+     * @return de berekende bonus
+     */
     public int getbonus(Calendar tijdOver){
         return tijdsbonus.getTijdsBonus(tijdOver);
     }

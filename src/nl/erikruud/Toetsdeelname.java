@@ -91,10 +91,17 @@ public class Toetsdeelname {
         totaalScore += s;
     }
 
+    /**
+     * Laat de index van de lijst met vragen verwijzen naar het vorige element
+     */
     public void verlaagVraagnr(){
         if(huidigeVraagNummer > 0)
             huidigeVraagNummer--;
     }
+
+    /**
+     * Laat de index van de lijst met vragen verwijzen naar het volgende element
+     */
     public void verhoogVraagnr(){
         if(huidigeVraagNummer < gesteldeVragen.size())
             huidigeVraagNummer++;
@@ -118,6 +125,10 @@ public class Toetsdeelname {
         return false;
     }
 
+    /**
+     * Geeft het op dit moment behaalde aantal punten terug dat behaald is in een toetsdeelname
+     * @return het huidige aantal verkregen punten
+     */
     public float geefTotaalscore(){
         float totaalScore = 0;
         for(GesteldeVraag gv : gesteldeVragen) {
@@ -126,9 +137,17 @@ public class Toetsdeelname {
         return totaalScore;
     }
 
+    /**
+     * Zet de huidige vraag op de eerste positie van de lijst met vragen
+     */
     public void setEersteVraag(){
         huidigeVraagNummer = 0;
     }
+
+    /**
+     * Geeft de naam terug van de student aan wie de toetsdeelname toebehoort
+     * @return de student aan wie de deelname toebehoort
+     */
     public String getNaamVanStudent(){
         return studentNaam;
     }

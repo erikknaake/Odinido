@@ -1,6 +1,5 @@
 package nl.erikruud;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Vraag {

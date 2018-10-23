@@ -2,6 +2,9 @@ package nl.erikruud;
 
 import java.util.Calendar;
 
+/**
+ * Een tijdsbonus is een bonus die verkregen wordt voor het voortijdig afronden van een kennistoets
+ */
 public class Tijdsbonus {
     private int bonusPerMinuutOver;
 

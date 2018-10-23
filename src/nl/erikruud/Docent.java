@@ -148,6 +148,11 @@ public class Docent {
         return cal;
     }
 
+    /**
+     * Voegt een nieuw lokaal toe aan de lijst met beschikbare lokalen voor een docent met als lokaalnummner
+     * het opgegeven lokaalnummer
+     * @param lokaalNummer het lokaalnummer voor het nieuwe lokaal
+     */
     public void registreerLokaal(int lokaalNummer) {
         Lokaal l = new Lokaal(lokaalNummer);
         addLokaal(l);
@@ -155,7 +160,10 @@ public class Docent {
         //TODO check of het lokaal niet al bestaat
     }
 
-
+    /**
+     * Voegt een lokaal toe aan de lijst met beschikbare lokalen van een docent
+     * @param l het toe te voegen lokaal
+     */
     public void addLokaal(Lokaal l){
         lokalen.add(l);
     }

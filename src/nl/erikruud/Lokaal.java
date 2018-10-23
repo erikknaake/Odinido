@@ -2,6 +2,9 @@ package nl.erikruud;
 
 import java.util.Calendar;
 
+/**
+ * Een lokaal is een ruimte waarin een kennistoets is uit te voeren en behoort toe aan een enkele docent
+ */
 public class Lokaal {
     private int lokaalNummer;
     private Toetsuitvoering toetsuitvoering;
@@ -9,6 +12,11 @@ public class Lokaal {
     public Lokaal(int lokaalNummer){
         this.lokaalNummer = lokaalNummer;
     }
+
+    /**
+     * Het het uitslagoverzicht op dat behoort tot de toetsuitvoering die op het moment plaatsvindt in het lokaal
+     * @return het uitslagoverzicht van de toetsuitvoering die op dit moment plaatsvindt
+     */
     public String getUitslagOverzicht(){
         return toetsuitvoering.getUitslagOverzicht();
     }

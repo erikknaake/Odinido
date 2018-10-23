@@ -2,6 +2,9 @@ package nl.erikruud;
 
 import java.util.List;
 
+/**
+ * Een gestelde vraag is een vraag die aan een deelnemer van een kennistoets gesteld wordt
+ */
 public class GesteldeVraag {
     private boolean isJuistAntwoord;
     private int volgnr;

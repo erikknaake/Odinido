@@ -19,6 +19,10 @@ public class Toetsuitvoering {
         overzicht = "";
     }
 
+    /**
+     * Haalt het uitslagoverzicht op van alle deelnemers van de huidige toetsuitvoering
+     * @return het uitslagovericht van de huidige toetsuitvoering
+     */
     public String getUitslagOverzicht(){
         overzicht = "";
         addToOverzicht(kennistoets.getTitel(), kennistoets.getToetscode());
@@ -32,10 +36,21 @@ public class Toetsuitvoering {
         return overzicht;
     }
 
+    /**
+     * Voegt een titel en code toe aan het uitslagoverzicht
+     * @param titel de toe te voegen titel
+     * @param code de toe te voegen code
+     */
     public void addToOverzicht(String titel, String code){
         overzicht += ("Titel: " + titel + "\nToetsCode: " + code + "\n");
     }
 
+    /**
+     * Voegt de prestaties van een student toe aan het uitslagoverzicht
+     * @param r de totaalscore van de student
+     * @param bonus de verkregen bonus
+     * @param naam de naam van de student
+     */
     public void addToOverzicht(float r, int bonus, String naam){
         overzicht += (naam + ":\n\tScore: " + r + "\n\t" + bonus + "\n\tTotaal: " + (r + bonus) + "\n");
     }
