@@ -6,4 +6,6 @@ public interface GegevenAntwoord {
      * @param antwoord het door de student gegeven antwoord
      */
     void setGegevenAntwoord(String antwoord);
+
+    String getGegevenAntwoord();
 }

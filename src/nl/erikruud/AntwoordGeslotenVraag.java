@@ -10,11 +10,12 @@ public class AntwoordGeslotenVraag {
      * @return of het antwoord goed is
      */
     public boolean isAntwoordJuist(GegevenAntwoord gv){
-        //TODO
-        return true;
+        return tekst.equals(gv.getGegevenAntwoord());
     }
 
     public String getTekst() {
         return tekst;
     }
+
+
 }

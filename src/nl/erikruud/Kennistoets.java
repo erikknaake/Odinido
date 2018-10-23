@@ -38,8 +38,8 @@ public class Kennistoets {
      * @param vraagnr
      */
     public void stelVraag(int vraagnr){
-        //TODO
         Vraag ov = vragenInKennistoets.get(vraagnr).getVraag();
+        ov.print();
     }
 
 }

@@ -8,17 +8,18 @@ import java.util.Scanner;
 
 public class Toetsdeelname {
     private Calendar startTijd;
-    //private Calendar loopTijd;
+    private Calendar loopTijd;
     private String studentNaam;
     private int huidigeVraagNummer;
     private List<GesteldeVraag> gesteldeVragen;
 
     private float totaalScore;
 
-    public Toetsdeelname() {
+    public Toetsdeelname(Calendar startTijd, Calendar loopTijd) {
         totaalScore = 0;
         gesteldeVragen = new ArrayList<>();
-        startTijd = Calendar.getInstance();
+        this.loopTijd = loopTijd;
+        this.startTijd = startTijd;
     }
 
     /**
@@ -38,30 +39,33 @@ public class Toetsdeelname {
     public void voegDeelnemerToe(String naam){
         this.studentNaam = naam;
         setEersteVraag();
-        while(huidigeVraagNummer < gesteldeVragen.size()) {
-            if(true /*TODO: Student wil naar vorige vraag*/) {
-                verlaagVraagnr();
-            }
-
-            if(true /*TODO: Student wil naar volgende vraag*/) {
-                verhoogVraagnr();
-            }
+        while(huidigeVraagNummer < gesteldeVragen.size() && getGebruikteTijd().compareTo(loopTijd) < 0) {
+            System.out.println("Typ uw antwoord, of type t voor terug en v voor verder");
+            Scanner s = new Scanner(System.in);
+            String input = s.next();
 
             GegevenAntwoord ga;
             if(gesteldeVragen.get(huidigeVraagNummer).isOpenVraag()) {
-                String a = krijgAntwoord();
+                String a = krijgAntwoord(input);
                 ga = new GegevenAntwoordOpenVraag();
                 ga.setGegevenAntwoord(a);
             }
             else {
                 List<AntwoordGeslotenVraag> am = gesteldeVragen.get(huidigeVraagNummer).getAntwoordMogelijkheden();
-                String a = krijgAntwoord(am);
+                String a = krijgAntwoord(am, input);
                 ga = new GegevenAntwoordGeslotenVraag();
                 ga.setGegevenAntwoord(a);
                 gesteldeVragen.get(huidigeVraagNummer).krijgScoreVoorAntwoord(ga);
             }
-            int s = gesteldeVragen.get(huidigeVraagNummer).krijgScoreVoorAntwoord(ga);
-            verhoogScore(s);
+            int sc = gesteldeVragen.get(huidigeVraagNummer).krijgScoreVoorAntwoord(ga);
+            verhoogScore(sc);
+
+            if(input.equals("t")) {
+                verlaagVraagnr();
+            }
+            else if(input.equals("v")) {
+                verhoogVraagnr();
+            }
         }
     }
 
@@ -76,16 +80,16 @@ public class Toetsdeelname {
         huidigeVraagNummer++;
     }
 
-    public String krijgAntwoord(){
-        Scanner s = new Scanner(System.in);
-        System.out.println("Typ uw antwoord: ");
-        return s.next();
+    public String krijgAntwoord(String input){
+//        System.out.println("Typ uw antwoord: ");
+//        return s.next();
+        return new String();
     }
-    public String krijgAntwoord(List<AntwoordGeslotenVraag> mogelijkheden) {
-        String input = "";
-        System.out.println("Typ uw antwoord: ");
+
+    public String krijgAntwoord(List<AntwoordGeslotenVraag> mogelijkheden, String input) {
         while(!isInputValid(mogelijkheden, input)) {
             Scanner s = new Scanner(System.in);
+            input = s.next();
         }
         return input;
     }

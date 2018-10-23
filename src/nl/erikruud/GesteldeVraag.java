@@ -1,7 +1,5 @@
 package nl.erikruud;
 
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 public class GesteldeVraag {
@@ -13,15 +11,17 @@ public class GesteldeVraag {
     public int getScore(){
         return vraagInKennistoets.geefScore();
     }
-    public void GesteldeVraag(Vraag v, boolean isOpenvraag){
-        //TODO
+
+    public GesteldeVraag(VraagInKennistoets vik){
+        vraagInKennistoets = vik;
     }
+
     public int krijgScoreVoorAntwoord(GegevenAntwoord antwoord){
         return vraagInKennistoets.krijgScoreVoorAntwoord(antwoord);
     }
+
     public List<AntwoordGeslotenVraag> getAntwoordMogelijkheden(){
-        //TODO
-        return new ArrayList<>();
+        return vraagInKennistoets.getAntwoordMogelijkheden();
     }
 
     /**

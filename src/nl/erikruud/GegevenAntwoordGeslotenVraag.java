@@ -8,4 +8,11 @@ public class GegevenAntwoordGeslotenVraag implements GegevenAntwoord {
     public void setGegevenAntwoord(String antwoord) {
         gegevenAntwoord = antwoord;
     }
+
+    @Override
+    public String getGegevenAntwoord() {
+        return gegevenAntwoord;
+    }
+
+
 }

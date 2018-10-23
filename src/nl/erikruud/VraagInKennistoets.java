@@ -1,5 +1,7 @@
 package nl.erikruud;
 
+import java.util.List;
+
 public class VraagInKennistoets {
     private int volgnr;
     private Vraag vraag;
@@ -22,5 +24,9 @@ public class VraagInKennistoets {
      */
     public int geefScore() {
         return vraag.geefScore();
+    }
+
+    public List<AntwoordGeslotenVraag> getAntwoordMogelijkheden() {
+        return vraag.getAntwoordMogelijkheden();
     }
 }

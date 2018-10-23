@@ -24,4 +24,13 @@ public abstract class Vraag {
     public int geefScore() {
         return getHuidigeScoreModel().getScore();
     }
+
+    public abstract List<AntwoordGeslotenVraag> getAntwoordMogelijkheden();
+
+    public void print() {
+        System.out.println(tekst);
+        printExtra();
+    }
+
+    public void printExtra() {}
 }

@@ -1,5 +1,6 @@
 package nl.erikruud;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class GeslotenVraag extends Vraag {
@@ -7,8 +8,7 @@ public class GeslotenVraag extends Vraag {
     private List<AntwoordGeslotenVraag> foutAntwoordGeslotenVraag;
 
     public AntwoordGeslotenVraag getJuistAntwoord(){
-        //TODO
-        return new AntwoordGeslotenVraag();
+        return goedAntwoordGeslotenVraag;
     }
 
     @Override
@@ -18,5 +18,17 @@ public class GeslotenVraag extends Vraag {
             return getHuidigeScoreModel().getScore();
         }
         return 0;
+    }
+
+    @Override
+    public List<AntwoordGeslotenVraag> getAntwoordMogelijkheden() {
+        List<AntwoordGeslotenVraag> mogelijkheden = new ArrayList<>(foutAntwoordGeslotenVraag);
+        mogelijkheden.add(goedAntwoordGeslotenVraag);
+        return mogelijkheden;
+    }
+
+    @Override
+    public void printExtra() {
+        System.out.println(getAntwoordMogelijkheden());
     }
 }

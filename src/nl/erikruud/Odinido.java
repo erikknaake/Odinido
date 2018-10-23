@@ -1,9 +1,15 @@
 package nl.erikruud;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Odinido {
     private List<Docent> docenten;
+
+    public Odinido() {
+        docenten = new ArrayList<>();
+    }
 
     /**
      * Stelt een kennistoets beschikbaar voor studenten
@@ -12,7 +18,8 @@ public class Odinido {
      */
     public void openKennistoets(String toetscode, String docentCode){
         Docent d = getDocent(docentCode);
-        d.startKennistoets(toetscode);
+        if(d != null)
+            d.startKennistoets(toetscode);
     }
 
     /**
@@ -54,7 +61,6 @@ public class Odinido {
      * @param naam de naam van de student die wil deelnemen aan de kennistoets
      */
     public void neemDeelAanKennistoets(int lokaalNummer, String naam){
-        //TODO
         Lokaal l = null;
         for(Docent d : docenten) {
             l = d.getLokaal(lokaalNummer);
@@ -72,5 +78,40 @@ public class Odinido {
     public void haalUitslagOverzichtOp(int lokaalNummer, String docentCode) {
         Docent d = getDocent(docentCode);
         System.out.println(d.haalUitslagOverzichtOp(lokaalNummer));
+    }
+
+    public void wachtOpInput() {
+        while(true) {
+            System.out.println("Voer h in om een uitslagoverzicht op te halen, n om deel te nemen aan een kennistoets, r om een lokaal te registeren, o om een kennistoets te openen, q om te stoppen");
+            Scanner s = new Scanner(System.in);
+            String input = s.next();
+            if (input.equals("h")) {
+                System.out.println("Voer het lokaalnummer in");
+                int lokaalNummer = s.nextInt();
+                System.out.println("Voer uw docentcode in");
+                String code = s.next();
+                haalUitslagOverzichtOp(lokaalNummer, code);
+            } else if (input.equals("n")) {
+                System.out.println("Voer het lokaalnummer in");
+                int lokaalNummer = s.nextInt();
+                System.out.println("Voer je naam in");
+                String naam = s.next();
+                neemDeelAanKennistoets(lokaalNummer, naam);
+            } else if (input.equals("r")) {
+                System.out.println("Voer het lokaalnummer in");
+                int lokaalNummer = s.nextInt();
+                System.out.println("Voer uw docentcode in");
+                String code = s.next();
+                registreerLokaal(lokaalNummer, code);
+            } else if (input.equals("o")) {
+                System.out.println("Voer de toetscode in");
+                String toetsCode = s.next();
+                System.out.println("Voer uw docentcode in");
+                String code = s.next();
+                openKennistoets(toetsCode, code);
+            } else if (input.equals("q")) {
+                return;
+            }
+        }
     }
 }

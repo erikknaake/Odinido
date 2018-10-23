@@ -44,7 +44,7 @@ public class Toetsuitvoering {
      * @param naam de naam van de student die wil deelnemen aan de toets
      */
     public void voegDeelnemerToe(String naam){
-        Toetsdeelname t = new Toetsdeelname();
+        Toetsdeelname t = new Toetsdeelname(looptijd);
         t.voegDeelnemerToe(naam);
         toetsDeelnames.add(t);
     }

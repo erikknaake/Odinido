@@ -11,7 +11,6 @@ public class OpenVraag extends Vraag {
     public OpenVraag(){
         resetAntwoordIndex();
         juisteAntwoorden = new ArrayList<>();
-        //TODO: vul juiste antwoorden in
     }
 
     public AntwoordOpenVraag getAntwoordMogelijkeheid(int antwoordIndex){
@@ -39,6 +38,11 @@ public class OpenVraag extends Vraag {
             }
         }
         return 0;
+    }
+
+    @Override
+    public List<AntwoordGeslotenVraag> getAntwoordMogelijkheden() {
+        return null;
     }
 
 }
