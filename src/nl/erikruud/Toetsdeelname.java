@@ -26,6 +26,18 @@ public class Toetsdeelname {
      */
     public void voegDeelnemerToe(String naam){
         this.studentNaam = naam;
+        setEersteVraag();
+        while(huidigeVraagNummer < gesteldeVragen.size()) {
+            if(true /*TODO: Student wil naar vorige vraag*/) {
+                verlaagVraagnr();
+            }
+
+            if(true /*TODO: Student wil naar volgende vraag*/) {
+                verhoogVraagnr();
+            }
+
+            
+        }
     }
     public void verhoogScore(int s){
         //TODO

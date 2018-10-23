@@ -14,7 +14,8 @@ public class Lokaal {
         return new String();
     }
     public void startKennistoets(Kennistoets k, Calendar t1, Calendar t2){
-        //TODO
+        Toetsuitvoering tu = new Toetsuitvoering(k, t1, t2);
+        voegToetsuitvoeringToe(tu);
     }
 
     /**
@@ -30,7 +31,7 @@ public class Lokaal {
      * @param tu de toetsuitvoering om toe te voegen aan het lokaal
      */
     public void voegToetsuitvoeringToe(Toetsuitvoering tu){
-        this.toetsuitvoering = tu;
+        toetsuitvoering = tu;
     }
 
     /**

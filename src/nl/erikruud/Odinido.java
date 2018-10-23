@@ -10,8 +10,9 @@ public class Odinido {
      * @param toetscode de code van de toets die moet worden open gesteld
      * @param docentCode de docent die de kennistoets open wil stellen
      */
-    private void openKennistoets(String toetscode, String docentCode){
-        //TODO
+    public void openKennistoets(String toetscode, String docentCode){
+        Docent d = getDocent(docentCode);
+        d.startKennistoets(toetscode);
     }
 
     /**
@@ -19,9 +20,20 @@ public class Odinido {
      * @param lokaalNummer het nummer van het toe te voegen lokaal
      * @param docentCode de docent waaraan het lokaal moet worden toegevoegd
      */
-    private void registreerLokaal(int lokaalNummer, String docentCode){
-        //TODO
+    public void registreerLokaal(int lokaalNummer, String docentCode){
+        Docent d = getDocent(docentCode);
+        addDocent(d);
+        d.registreerLokaal(lokaalNummer);
     }
+
+    /**
+     * Voegt een docent toe aan de lijst van docenten.
+     * @param d Docent om toe te voegen
+     */
+    private void addDocent(Docent d) {
+        docenten.add(d);
+    }
+
 
     /**
      * Zoekt een docent op, op basis van een docentcode
@@ -29,8 +41,11 @@ public class Odinido {
      * @return de gevonden docent
      */
     public Docent getDocent(String docentCode){
-        //TODO
-        return new Docent();
+        for(Docent d : docenten) {
+            if(d.getDocentcode().equals(docentCode))
+                return d;
+        }
+        return null;
     }
 
     /**
@@ -40,5 +55,17 @@ public class Odinido {
      */
     public void neemDeelAanKennistoets(int lokaalNummer, String naam){
         //TODO
+        Lokaal l = null;
+        for(Docent d : docenten) {
+            l = d.getLokaal(lokaalNummer);
+            if(d.getLokaal(lokaalNummer) != null) {
+                break;
+            }
+        }
+        if(l == null) {
+            System.out.println("Kon lokaal niet vinden");
+            return;
+        }
+        l.voegDeelnemerToe(naam);
     }
 }

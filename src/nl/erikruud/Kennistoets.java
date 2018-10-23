@@ -21,6 +21,7 @@ public class Kennistoets {
     public String getToetscode(){
         return toetsCode;
     }
+
     /**
      * Geeft de titel behorende aan een kennistoets object
      * @return de titel behorende bij de kennistoets
@@ -28,7 +29,14 @@ public class Kennistoets {
     public String getTitel(){
         return toetsTitel;
     }
+
+    /**
+     *
+     * @param vraagnr
+     */
     public void stelVraag(int vraagnr){
         //TODO
+        Vraag ov = vragenInKennistoets.get(vraagnr).getVraag();
     }
+
 }

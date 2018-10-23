@@ -17,8 +17,8 @@ public class VraagInKennistoets {
      * Haalt de vraag op behorende bij deze instantie
      * @return een vraag die hoort bij een kennistoets
      */
-    public String getVraag(){
+    public Vraag getVraag(){
         //TODO
-        return new String();
+        return new Vraag();
     }
 }

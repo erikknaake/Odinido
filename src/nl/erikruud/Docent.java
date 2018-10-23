@@ -15,10 +15,12 @@ public class Docent {
     private List<Lokaal> lokalen;
     private List<Kennistoets> kennistoetsen;
 
-    public Docent(){
+    public Docent(int lokaalNummer){
         isPremiumDocent = false;
         lokalen = new ArrayList<>();
         kennistoetsen = new ArrayList<>();
+        Lokaal l = new Lokaal(lokaalNummer);
+        lokalen.add(l);
     }
 
     /**
@@ -103,8 +105,18 @@ public class Docent {
         //TODO
         return new String();
     }
-    public void startKennistoets(String docentcode,String toetscode){
-        //TODO
+    public void startKennistoets(String toetscode){
+        Kennistoets k = getKennistoets(toetscode);
+        Lokaal l;
+        if(isPremiumDocent) {
+            l = selecteerLokaal();
+        }
+        else {
+            l = getStandaardLokaal();
+        }
+        Calendar t1 = selecteerTijdOpen();
+        Calendar t2 = selecteerMaximumDeelnameDuur();
+        l.startKennistoets(k, t1, t2);
     }
 
     /**
