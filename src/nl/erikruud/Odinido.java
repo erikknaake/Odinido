@@ -2,6 +2,10 @@ package nl.erikruud;
 
 import java.util.*;
 
+/**
+ * Odinido functioneert als een controller die alle inkomende verzoeken afhandeld en interactie over een command
+ * line interface mogelijk maakt
+ */
 public class Odinido {
     private List<Docent> docenten;
 
@@ -66,7 +70,6 @@ public class Odinido {
         docenten.add(d);
     }
 
-
     /**
      * Zoekt een docent op, op basis van een docentcode
      * @param docentCode de code van de docent die opgezocht moet worden
@@ -100,11 +103,19 @@ public class Odinido {
         l.voegDeelnemerToe(naam);
     }
 
+    /**
+     * Stelt een docent in staat om een uitslagoverzicht op de halen van een toetsuitvoering die plaatsvindt in een lokaal
+     * @param lokaalNummer het lokaalnummer waar de uitvoering van de kennistoets plaatsvindt
+     * @param docentCode de docentcode van de docent aan wie het lokaal toebehoort
+     */
     public void haalUitslagOverzichtOp(int lokaalNummer, String docentCode) {
         Docent d = getDocent(docentCode);
         System.out.println(d.haalUitslagOverzichtOp(lokaalNummer));
     }
 
+    /**
+     * Verwerkt communicatie met de eindgebruiker over een command line interface
+     */
     public void wachtOpInput() {
         while(true) {
             System.out.println("Voer h in om een uitslagoverzicht op te halen, n om deel te nemen aan een kennistoets, r om een lokaal te registeren, o om een kennistoets te openen, q om te stoppen");
@@ -132,6 +143,11 @@ public class Odinido {
         }
     }
 
+    /**
+     * Stelt een docent in staat om een uitslagoverzicht op de halen van een toetsuitvoering die plaatsvindt in een lokaal
+     * via een command line interface
+     * @param s de te gebruker scanner instantie
+     */
     private void haalUitslagOverzichtOpMetInput(Scanner s) {
         System.out.println("Voer uw docentcode in");
         Docent d = inputDocent(s);
@@ -155,6 +171,10 @@ public class Odinido {
         haalUitslagOverzichtOp(lokaalNummer, d.getDocentcode());
     }
 
+    /**
+     * Stelt een docent in staat om een kennistoets te starten in een lokaal via een command line interface
+     * @param s de te gebruiken scanner instantie
+     */
     private void openKennisToetsMetInput(Scanner s) {
         System.out.println("Voer uw docentcode in");
         Docent d = inputDocent(s);
