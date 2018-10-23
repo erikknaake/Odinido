@@ -10,19 +10,25 @@ public class GesteldeVraag {
     private VraagInKennistoets vraagInKennistoets;
     private GegevenAntwoord gegevenAntwoord;
 
-    public int getBonus(Calendar tijd){
-        //TODO
-        return 0;
+    public int getScore(){
+        return vraagInKennistoets.geefScore();
     }
     public void GesteldeVraag(Vraag v, boolean isOpenvraag){
         //TODO
     }
     public int krijgScoreVoorAntwoord(GegevenAntwoord antwoord){
-        //TODO
-        return 0;
+        return vraagInKennistoets.krijgScoreVoorAntwoord(antwoord);
     }
     public List<AntwoordGeslotenVraag> getAntwoordMogelijkheden(){
         //TODO
         return new ArrayList<>();
+    }
+
+    /**
+     * Controleerd of de vraag een open vraag is
+     * @return True als de vraag een open vraag is
+     */
+    public boolean isOpenVraag() {
+        return vraagInKennistoets.getVraag() instanceof OpenVraag;
     }
 }

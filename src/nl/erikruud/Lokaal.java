@@ -10,8 +10,7 @@ public class Lokaal {
         this.lokaalNummer = lokaalNummer;
     }
     public String getUitslagOverzicht(){
-        //TODO
-        return new String();
+        return toetsuitvoering.getUitslagOverzicht();
     }
     public void startKennistoets(Kennistoets k, Calendar t1, Calendar t2){
         Toetsuitvoering tu = new Toetsuitvoering(k, t1, t2);

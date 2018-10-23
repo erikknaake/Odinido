@@ -3,39 +3,42 @@ package nl.erikruud;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OpenVraag implements Vraag {
-    private String tekst;
+public class OpenVraag extends Vraag {
+
     private int antwoordMogelijkHeidIndex;
+    private List<AntwoordOpenVraag> juisteAntwoorden;
 
     public OpenVraag(){
-        this.antwoordMogelijkHeidIndex = 0;
+        resetAntwoordIndex();
+        juisteAntwoorden = new ArrayList<>();
+        //TODO: vul juiste antwoorden in
     }
 
-    public List<AntwoordOpenVraag> getAntwoordMogelijkehid(int antwoordIndex){
-        //TODO
-        return new ArrayList<>();
+    public AntwoordOpenVraag getAntwoordMogelijkeheid(int antwoordIndex){
+        return juisteAntwoorden.get(antwoordIndex);
     }
 
     public void resetAntwoordIndex(){
-        //TODO
+        antwoordMogelijkHeidIndex = 0;
     }
 
     public void verhoogAntwoordMogelijkheidIndex(){
-        //TODO
+        antwoordMogelijkHeidIndex++;
     }
 
-    @Override
-    public ScoreVoorVraag getHuidigeScoreModel() {
-        return null; //TODO
-    }
 
     @Override
     public int krijgScoreVoorAntwoord(GegevenAntwoord ga) {
-        return 0; //TODO
+        resetAntwoordIndex();
+        while (antwoordMogelijkHeidIndex < juisteAntwoorden.size()) {
+            AntwoordOpenVraag aov = getAntwoordMogelijkeheid(antwoordMogelijkHeidIndex);
+            verhoogAntwoordMogelijkheidIndex();
+            if(aov.isAntwoordJuist(ga)) {
+                ScoreVoorVraag svv = getHuidigeScoreModel();
+                return svv.getScore();
+            }
+        }
+        return 0;
     }
 
-    @Override
-    public Score geefScore() {
-        return null; //TODO
-    }
 }

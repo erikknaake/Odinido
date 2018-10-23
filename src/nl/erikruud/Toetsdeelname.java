@@ -11,17 +11,18 @@ public class Toetsdeelname {
     private int huidigeVraagNummer;
     private List<GesteldeVraag> gesteldeVragen;
 
-    public int berekenBonus(){
-        //TODO
-        return 0;
-    }
-    public int getGebruikteTijd(){
-        //TODO
-        return 0;
+    /**
+     * Vindt het verschil tussen de huidige tijd en de starttijd van de deelname
+     * @return Tijd dat de deelnemer heeft gedaan over de kennistoets
+     */
+    public Calendar getGebruikteTijd(){
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.MILLISECOND, Calendar.getInstance().compareTo(startTijd));
+        return cal;
     }
 
     /**
-     * Koppeld een studentnaam aan deze toetsdeelname
+     * Koppelt een studentnaam aan deze toetsdeelname
      * @param naam de studentNaam van de student aan wie deze deelname toebehoort
      */
     public void voegDeelnemerToe(String naam){
@@ -36,12 +37,28 @@ public class Toetsdeelname {
                 verhoogVraagnr();
             }
 
-            
+            GegevenAntwoord ga;
+            if(gesteldeVragen.get(huidigeVraagNummer).isOpenVraag()) {
+                String a = krijgAntwoord();
+                ga = new GegevenAntwoordOpenVraag();
+                ga.setGegevenAntwoord(a);
+            }
+            else {
+                List<AntwoordGeslotenVraag> am = gesteldeVragen.get(huidigeVraagNummer).getAntwoordMogelijkheden();
+                String a = krijgAntwoord(am);
+                ga = new GegevenAntwoordGeslotenVraag();
+                ga.setGegevenAntwoord(a);
+                gesteldeVragen.get(huidigeVraagNummer).krijgScoreVoorAntwoord(ga);
+            }
+            int s = gesteldeVragen.get(huidigeVraagNummer).krijgScoreVoorAntwoord(ga);
+            verhoogScore(s);
         }
     }
+
     public void verhoogScore(int s){
         //TODO
     }
+
     public void verlaagVraagnr(){
         huidigeVraagNummer--;
     }
@@ -52,10 +69,18 @@ public class Toetsdeelname {
         //TODO
         return new String();
     }
-    public float geefTotaalscore(){
+    public String krijgAntwoord(List<AntwoordGeslotenVraag> mogelijkheden){
         //TODO
-        return 0;
+        return new String();
     }
+    public float geefTotaalscore(){
+        float totaalScore = 0;
+        for(GesteldeVraag gv : gesteldeVragen) {
+            totaalScore += gv.getScore();
+        }
+        return totaalScore;
+    }
+
     public void setEersteVraag(){
         huidigeVraagNummer = 0;
     }

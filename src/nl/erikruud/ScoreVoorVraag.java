@@ -7,14 +7,11 @@ public class ScoreVoorVraag {
     private Calendar tot;
     private Score score;
 
-    public Score huidigeScoreBijVraag(){
-        //TODO
-        return new Score();
+    public boolean isHuidigeScoreBijVraag(){
+        return Calendar.getInstance().compareTo(tot) < 0 && Calendar.getInstance().compareTo(van) > 0;
     }
-    public int geefScore(Vraag v){
-        //TODO
-        return 0;
-    }
+
+
     public int getScore(){
         return score.getScore();
     }

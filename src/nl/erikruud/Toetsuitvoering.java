@@ -9,23 +9,34 @@ public class Toetsuitvoering {
     private Calendar looptijd;
     private Kennistoets kennistoets;
     private List<Toetsdeelname> toetsDeelnames;
+    private String overzicht;
 
     public Toetsuitvoering(Kennistoets k, Calendar t1, Calendar t2){
         this.toetsDeelnames = new ArrayList<>();
         this.startTijd = t1;
         this.looptijd = t2;
         this.kennistoets = k;
+        overzicht = "";
     }
 
     public String getUitslagOverzicht(){
-        //TODO
-        return new String();
+        overzicht = "";
+        for(Toetsdeelname td : toetsDeelnames) {
+            float r = td.geefTotaalscore();
+            Calendar tijd = td.getGebruikteTijd();
+            int bonus = kennistoets.getTijdsbonus(tijd);
+            addToOverzicht(r, bonus, td.getNaamVanStudent());
+        }
+        addToOverzicht(kennistoets.getTitel(), kennistoets.getToetscode());
+        return overzicht;
     }
+
     public void addToOverzicht(String titel, String code){
-        //TODO
+        overzicht += ("Titel: " + titel + "\nToetsCode: " + code + "\n");
     }
+
     public void addToOverzicht(float r, int bonus, String naam){
-        //TODO
+        overzicht += (naam + ": " + r + " " + bonus + "Totaal: " + (r + bonus));
     }
 
     /**

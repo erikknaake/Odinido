@@ -6,6 +6,6 @@ public class GegevenAntwoordGeslotenVraag implements GegevenAntwoord {
 
     @Override
     public void setGegevenAntwoord(String antwoord) {
-        //TODO
+        gegevenAntwoord = antwoord;
     }
 }

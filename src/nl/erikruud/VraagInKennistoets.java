@@ -5,20 +5,22 @@ public class VraagInKennistoets {
     private Vraag vraag;
 
     public int krijgScoreVoorAntwoord (GegevenAntwoord antwoord){
-        //TODO
-        return 0;
-    }
-    public Score geefScore(){
-        //TODO
-        return new Score();
+        return vraag.krijgScoreVoorAntwoord(antwoord);
     }
 
     /**
      * Haalt de vraag op behorende bij deze instantie
      * @return een vraag die hoort bij een kennistoets
      */
-    public Vraag getVraag(){
-        //TODO
-        return new Vraag();
+    public Vraag getVraag() {
+        return vraag;
+    }
+
+    /**
+     * Geeft de score die behaald is voor de vraag
+     * @return Score die door een speciefieke deelnemer is behaald voor deze gestelde vraag.
+     */
+    public int geefScore() {
+        return vraag.geefScore();
     }
 }

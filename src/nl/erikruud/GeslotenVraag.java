@@ -2,8 +2,7 @@ package nl.erikruud;
 
 import java.util.List;
 
-public class GeslotenVraag implements Vraag {
-    private String tekst;
+public class GeslotenVraag extends Vraag {
     private AntwoordGeslotenVraag goedAntwoordGeslotenVraag;
     private List<AntwoordGeslotenVraag> foutAntwoordGeslotenVraag;
 
@@ -13,20 +12,11 @@ public class GeslotenVraag implements Vraag {
     }
 
     @Override
-    public ScoreVoorVraag getHuidigeScoreModel() {
-        //TODO
-        return null;
-    }
-
-    @Override
     public int krijgScoreVoorAntwoord(GegevenAntwoord ga) {
-        //TODO
+        AntwoordGeslotenVraag agv = getJuistAntwoord();
+        if(agv.isAntwoordJuist(ga)) {
+            return getHuidigeScoreModel().getScore();
+        }
         return 0;
-    }
-
-    @Override
-    public Score geefScore() {
-        //TODO
-        return null;
     }
 }

@@ -40,7 +40,7 @@ public class Odinido {
      * @param docentCode de code van de docent die opgezocht moet worden
      * @return de gevonden docent
      */
-    public Docent getDocent(String docentCode){
+    private Docent getDocent(String docentCode){
         for(Docent d : docenten) {
             if(d.getDocentcode().equals(docentCode))
                 return d;
@@ -67,5 +67,10 @@ public class Odinido {
             return;
         }
         l.voegDeelnemerToe(naam);
+    }
+
+    public void haalUitslagOverzichtOp(int lokaalNummer, String docentCode) {
+        Docent d = getDocent(docentCode);
+        System.out.println(d.haalUitslagOverzichtOp(lokaalNummer));
     }
 }

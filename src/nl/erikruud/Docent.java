@@ -26,9 +26,15 @@ public class Docent {
     /**
      * Stelt een docent in staat op elk gewenst moment een overzicht met uitslagen van een kennistoetsuitvoering op
      * te stellen
+     * @param lokaalNummer nummer van het lokaal om het overzicht van op te halen
+     * @return Overzicht in de vorm van een string
      */
-    public void haalUitslagOverzichtOp(){
-        //TODO
+    public String haalUitslagOverzichtOp(int lokaalNummer){
+        Lokaal l = getLokaal(lokaalNummer);
+        if(l == null) {
+            return "";
+        }
+        return l.getUitslagOverzicht();
     }
 
     /**
@@ -99,12 +105,9 @@ public class Docent {
         //TODO
     }
     public void addLokaal(Lokaal l){
-        //TODO
+        lokalen.add(l);
     }
-    public String haalUitslagOverzichtOp(int lokaalNummer){
-        //TODO
-        return new String();
-    }
+
     public void startKennistoets(String toetscode){
         Kennistoets k = getKennistoets(toetscode);
         Lokaal l;
