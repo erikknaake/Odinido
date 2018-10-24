@@ -175,7 +175,6 @@ public class Docent {
         Lokaal l = new Lokaal(lokaalNummer);
         addLokaal(l);
         System.out.println("Lokaal is toegevoegd");
-        //TODO check of het lokaal niet al bestaat
     }
 
     /**
@@ -201,7 +200,6 @@ public class Docent {
         }
         Calendar t1 = selecteerTijdOpen();
         Calendar t2 = selecteerMaximumDeelnameDuur();
-        //TODO: gaat ergens mis in vertaal slag van looptijd naar eindtijd
         l.startKennistoets(k, t1, t2);
     }
 
@@ -227,5 +225,9 @@ public class Docent {
      */
     public List<Lokaal> getLokalen() {
         return lokalen;
+    }
+
+    public boolean isPremiumDocent() {
+        return isPremiumDocent;
     }
 }

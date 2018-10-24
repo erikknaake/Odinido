@@ -58,8 +58,19 @@ public class Odinido {
      */
     public void registreerLokaal(int lokaalNummer, String docentCode){
         Docent d = getDocent(docentCode);
-        addDocent(d);
-        d.registreerLokaal(lokaalNummer);
+        if(d != null) {
+            if(d.isPremiumDocent()) {
+                Lokaal l = getLokaal(lokaalNummer);
+                if (l == null)
+                    d.registreerLokaal(lokaalNummer);
+                else
+                    System.out.println("Dit lokaal bestaat al");
+            }
+            else
+                System.out.println("U bent geen premium docent");
+        }
+        else
+            System.out.println("Deze docent bestaat niet");
     }
 
     /**
@@ -89,18 +100,27 @@ public class Odinido {
      * @param naam de naam van de student die wil deelnemen aan de kennistoets
      */
     public void neemDeelAanKennistoets(int lokaalNummer, String naam){
-        Lokaal l = null;
-        for(Docent d : docenten) {
-            l = d.getLokaal(lokaalNummer);
-            if(d.getLokaal(lokaalNummer) != null) {
-                break;
-            }
-        }
+        Lokaal l = getLokaal(lokaalNummer);
+//        for(Docent d : docenten) {
+//            l = d.getLokaal(lokaalNummer);
+//            if(d.getLokaal(lokaalNummer) != null) {
+//                break;
+//            }
+//        }
         if(l == null) {
             System.out.println("Kon lokaal niet vinden");
             return;
         }
         l.voegDeelnemerToe(naam);
+    }
+
+    private Lokaal getLokaal(int lokaalNummer) {
+        for(Docent d : docenten) {
+            Lokaal l = d.getLokaal(lokaalNummer);
+            if(l != null)
+                return l;
+        }
+        return null;
     }
 
     /**

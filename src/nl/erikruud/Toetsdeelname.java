@@ -18,7 +18,6 @@ public class Toetsdeelname {
         this.loopTijd = loopTijd;
         this.startTijd = startTijd;
         initGesteldeVragen(k);
-        System.out.println("looptijd: " + loopTijd);
     }
 
     private void initGesteldeVragen(Kennistoets k) {
@@ -30,29 +29,12 @@ public class Toetsdeelname {
     }
 
     /**
-     * Vindt het verschil tussen de huidige tijd en de starttijd van de deelname
-     * @return Tijd dat de deelnemer heeft gedaan over de kennistoets
-     */
-    public Calendar getGebruikteTijd(){
-        return substractCalendars(Calendar.getInstance(), startTijd);
-//        Calendar cal = Calendar.getInstance();
-//        Date dif = new Date(cal.getTime().getTime() - startTijd.getTime().getTime());
-//        cal.setTime(dif);
-//        return cal;
-    }
-
-    /**
      * Geeft de tijd die de deelnemer nog heeft om de toets te maken
      * @return Tijd die de deelnemer nog heeft om de toets te doorlopen
      */
     public Calendar getTijdOver() {
         System.out.println(substractCalendars(loopTijd, substractCalendars(Calendar.getInstance(), startTijd)));
         return substractCalendars(loopTijd, substractCalendars(Calendar.getInstance(), startTijd));
-//        Calendar cal = getGebruikteTijd();
-//        Date dif = new Date(cal.getTime().getTime() - loopTijd.getTime().getTime());
-//        Calendar cal2 = Calendar.getInstance();
-//        cal2.setTime(dif);
-//        return cal2;
     }
 
     private Calendar substractCalendars(Calendar cal1, Calendar cal2) {
@@ -70,7 +52,6 @@ public class Toetsdeelname {
         this.studentNaam = naam;
         setEersteVraag();
         String input = "";
-        //TODO: test tijd constraint
         while(isErNogTijdOver()) {
             System.out.println("Typ uw antwoord, of type t voor terug en v voor verder, type k als u klaar bent");
             if(huidigeVraagNummer == gesteldeVragen.size() - 1) {
@@ -109,7 +90,8 @@ public class Toetsdeelname {
         }
         System.out.println("Toets wordt ingeleverd...");
     }
-    
+
+    @SuppressWarnings("deprecation")
     private boolean isErNogTijdOver() {
         return getTijdOver().getTime().getYear() > 69;
     }
