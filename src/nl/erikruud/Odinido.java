@@ -34,10 +34,8 @@ public class Odinido {
         List<Kennistoets> kennistoetsen1 = new ArrayList<>();
         kennistoetsen1.add(new Kennistoets("dea", "programmeeropdracht", tijdsbonussenVoorKennistoets, vragenInKennistoets1));
         docenten = new ArrayList<>();
-        Docent docent1 = new Docent("e.knaake@student.han.nl", "Erik", "Knaake", "P@ssword1", "ek", true, lokalen1, kennistoetsen1);
+        Docent docent1 = new Docent("e.knaake@student.han.nl", "Erik", "Knaake", "P@ssword1", "ek", false, lokalen1, kennistoetsen1);
         docenten.add(docent1);
-//        Docent docent2 = new Docent("r.hermans@student.han.nl", "Ruud", "Hermans", "root", "rh", false);
-//        docenten.add(docent2);
     }
 
     /**

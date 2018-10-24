@@ -7,14 +7,14 @@ import java.util.List;
 /**
  * Een toetsuitvoering is de uitvoering van een willekeurige toets binnen een lokaal
  */
-public class Toetsuitvoering {
+public class Toetsuitvoering implements Runnable {
     private Calendar startTijd;
-    private Calendar looptijd; //TODO: toets dicht zetten nadat tijd is verlopen
-    private Calendar looptijdStudent; //TODO: verwerken in DCD
+    private Calendar looptijd;
+    private Calendar looptijdStudent;
     private Kennistoets kennistoets;
     private List<Toetsdeelname> toetsDeelnames;
     private String overzicht;
-
+    private Thread thread;
     /**
      * Maakt een nieuwe toetsuitvoering aan op basis van de meegegeven informatie
      * @param k de kennistoets waarvoor een uitvoering moet worden gestart
@@ -28,6 +28,8 @@ public class Toetsuitvoering {
         looptijdStudent = t2;
         this.kennistoets = k;
         overzicht = "";
+        thread = new Thread(this);
+        thread.start();
     }
 
     /**
@@ -83,5 +85,24 @@ public class Toetsuitvoering {
      */
     public Toetsdeelname getToetsdeelname(int index){
         return toetsDeelnames.get(index);
+    }
+
+    @Override
+    public void run() {
+        while(toetsLooptNog()) {
+            try {
+                Thread.sleep(200);
+            }
+            catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        for(Toetsdeelname t : toetsDeelnames) {
+            t.laatToetsVerlopen();
+        }
+    }
+
+    private boolean toetsLooptNog() {
+        return CalendarUtils.isCalGroterDanEpoch(CalendarUtils.substractCalendars(looptijd, CalendarUtils.substractCalendars(Calendar.getInstance(), startTijd)));
     }
 }

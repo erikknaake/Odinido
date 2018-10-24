@@ -1,6 +1,5 @@
 package nl.erikruud;
 
-
 import java.util.*;
 
 public class Toetsdeelname {
@@ -9,6 +8,7 @@ public class Toetsdeelname {
     private String studentNaam;
     private int huidigeVraagNummer;
     private List<GesteldeVraag> gesteldeVragen;
+    private boolean toetsNogOpen;
 
     private float totaalScore;
 
@@ -18,6 +18,7 @@ public class Toetsdeelname {
         this.loopTijd = loopTijd;
         this.startTijd = startTijd;
         initGesteldeVragen(k);
+        toetsNogOpen = true;
     }
 
     private void initGesteldeVragen(Kennistoets k) {
@@ -33,15 +34,7 @@ public class Toetsdeelname {
      * @return Tijd die de deelnemer nog heeft om de toets te doorlopen
      */
     public Calendar getTijdOver() {
-        System.out.println(substractCalendars(loopTijd, substractCalendars(Calendar.getInstance(), startTijd)));
-        return substractCalendars(loopTijd, substractCalendars(Calendar.getInstance(), startTijd));
-    }
-
-    private Calendar substractCalendars(Calendar cal1, Calendar cal2) {
-        Calendar cal3 = Calendar.getInstance();
-        Date dif = new Date(cal1.getTime().getTime() - cal2.getTime().getTime());
-        cal3.setTime(dif);
-        return cal3;
+        return CalendarUtils.substractCalendars(loopTijd, CalendarUtils.substractCalendars(Calendar.getInstance(), startTijd));
     }
 
     /**
@@ -52,7 +45,7 @@ public class Toetsdeelname {
         this.studentNaam = naam;
         setEersteVraag();
         String input = "";
-        while(isErNogTijdOver()) {
+        while(isErNogTijdOver() && toetsNogOpen) {
             System.out.println("Typ uw antwoord, of type t voor terug en v voor verder, type k als u klaar bent");
             if(huidigeVraagNummer == gesteldeVragen.size() - 1) {
                 System.out.println("Dit is de laatste vraag, type k om te stoppen");
@@ -72,28 +65,32 @@ public class Toetsdeelname {
                 break;
             }
 
-            GegevenAntwoord ga;
-            if(gesteldeVragen.get(huidigeVraagNummer).isOpenVraag()) {
-                ga = new GegevenAntwoordOpenVraag();
-                ga.setGegevenAntwoord(input);
+            if(isErNogTijdOver() && toetsNogOpen) {
+                GegevenAntwoord ga;
+                if (gesteldeVragen.get(huidigeVraagNummer).isOpenVraag()) {
+                    ga = new GegevenAntwoordOpenVraag();
+                    ga.setGegevenAntwoord(input);
+                } else {
+                    List<AntwoordGeslotenVraag> am = gesteldeVragen.get(huidigeVraagNummer).getAntwoordMogelijkheden();
+                    String a = krijgAntwoord(am, input);
+                    ga = new GegevenAntwoordGeslotenVraag();
+                    ga.setGegevenAntwoord(a);
+                    gesteldeVragen.get(huidigeVraagNummer).krijgScoreVoorAntwoord(ga);
+                }
+                int sc = gesteldeVragen.get(huidigeVraagNummer).krijgScoreVoorAntwoord(ga);
+                verhoogScore(sc);
+                verhoogVraagnr();
             }
             else {
-                List<AntwoordGeslotenVraag> am = gesteldeVragen.get(huidigeVraagNummer).getAntwoordMogelijkheden();
-                String a = krijgAntwoord(am, input);
-                ga = new GegevenAntwoordGeslotenVraag();
-                ga.setGegevenAntwoord(a);
-                gesteldeVragen.get(huidigeVraagNummer).krijgScoreVoorAntwoord(ga);
+                System.out.println("Antwoord niet geaccepteerd, toets is verlopen");
+                break;
             }
-            int sc = gesteldeVragen.get(huidigeVraagNummer).krijgScoreVoorAntwoord(ga);
-            verhoogScore(sc);
-            verhoogVraagnr();
         }
         System.out.println("Toets wordt ingeleverd...");
     }
 
-    @SuppressWarnings("deprecation")
     private boolean isErNogTijdOver() {
-        return getTijdOver().getTime().getYear() > 69;
+        return CalendarUtils.isCalGroterDanEpoch(getTijdOver());
     }
 
     public void verhoogScore(int s){
@@ -159,5 +156,10 @@ public class Toetsdeelname {
      */
     public String getNaamVanStudent(){
         return studentNaam;
+    }
+
+    public void laatToetsVerlopen() {
+        toetsNogOpen = false;
+        System.out.println("toets verlopen");
     }
 }
