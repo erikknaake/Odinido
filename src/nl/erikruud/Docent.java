@@ -197,6 +197,7 @@ public class Docent {
         }
         else {
             l = getStandaardLokaal();
+            System.out.println("Toets wordt geopend in lokaal: " + l.getLokaalNummer());
         }
         Calendar t1 = selecteerTijdOpen();
         Calendar t2 = selecteerMaximumDeelnameDuur();

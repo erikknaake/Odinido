@@ -99,12 +99,6 @@ public class Odinido {
      */
     public void neemDeelAanKennistoets(int lokaalNummer, String naam){
         Lokaal l = getLokaal(lokaalNummer);
-//        for(Docent d : docenten) {
-//            l = d.getLokaal(lokaalNummer);
-//            if(d.getLokaal(lokaalNummer) != null) {
-//                break;
-//            }
-//        }
         if(l == null) {
             System.out.println("Kon lokaal niet vinden");
             return;
@@ -169,23 +163,26 @@ public class Odinido {
     private void haalUitslagOverzichtOpMetInput(Scanner s) {
         System.out.println("Voer uw docentcode in");
         Docent d = inputDocent(s);
-        System.out.println("Voer het lokaalnummer in");
-        List<Lokaal> lokalen = d.getLokalen();
-        System.out.println("Beschikbare lokalen: ");
-        for(Lokaal l : lokalen) {
-            System.out.println(l.getLokaalNummer());
+        int lokaalNummer;
+        if(d.isPremiumDocent()) {
+            List<Lokaal> lokalen = d.getLokalen();
+            lokaalNummer = Integer.MAX_VALUE;
+            System.out.println("Voer het lokaalnummer in");
+            System.out.println("Beschikbare lokalen: ");
+            for (Lokaal l : lokalen) {
+                System.out.println(l.getLokaalNummer());
+            }
+            do {
+                try {
+                    lokaalNummer = s.nextInt();
+                }
+                catch (InputMismatchException e) {
+                    System.out.println("Dat is geen nummer");
+                }
+            } while(!lokaalnummerInLijst(lokaalNummer, lokalen));
         }
-
-        int lokaalNummer = Integer.MAX_VALUE;
-        do {
-            try {
-                lokaalNummer = s.nextInt();
-            }
-            catch (InputMismatchException e) {
-                System.out.println("Dat is geen nummer");
-            }
-        } while(!lokaalnummerInLijst(lokaalNummer, lokalen));
-
+        else
+            lokaalNummer = d.getStandaardLokaal().getLokaalNummer();
         haalUitslagOverzichtOp(lokaalNummer, d.getDocentcode());
     }
 
