@@ -24,8 +24,8 @@ public class Toetsuitvoering {
     public Toetsuitvoering(Kennistoets k, Calendar t1, Calendar t2){
         this.toetsDeelnames = new ArrayList<>();
         this.startTijd = Calendar.getInstance();
-        looptijdStudent = t1;
-        this.looptijd = t2;
+        this.looptijd = t1;
+        looptijdStudent = t2;
         this.kennistoets = k;
         overzicht = "";
     }

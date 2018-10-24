@@ -1,10 +1,7 @@
 package nl.erikruud;
 
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Toetsdeelname {
     private Calendar startTijd;
@@ -21,6 +18,7 @@ public class Toetsdeelname {
         this.loopTijd = loopTijd;
         this.startTijd = startTijd;
         initGesteldeVragen(k);
+        System.out.println("looptijd: " + loopTijd);
     }
 
     private void initGesteldeVragen(Kennistoets k) {
@@ -36,15 +34,32 @@ public class Toetsdeelname {
      * @return Tijd dat de deelnemer heeft gedaan over de kennistoets
      */
     public Calendar getGebruikteTijd(){
-        Calendar cal = Calendar.getInstance();
-        cal.set(Calendar.MILLISECOND, Calendar.getInstance().compareTo(startTijd));
-        return cal;
+        return substractCalendars(Calendar.getInstance(), startTijd);
+//        Calendar cal = Calendar.getInstance();
+//        Date dif = new Date(cal.getTime().getTime() - startTijd.getTime().getTime());
+//        cal.setTime(dif);
+//        return cal;
     }
 
+    /**
+     * Geeft de tijd die de deelnemer nog heeft om de toets te maken
+     * @return Tijd die de deelnemer nog heeft om de toets te doorlopen
+     */
     public Calendar getTijdOver() {
-        Calendar cal = Calendar.getInstance();
-        cal.set(Calendar.MILLISECOND, loopTijd.compareTo(getGebruikteTijd()));
-        return cal;
+        System.out.println(substractCalendars(loopTijd, substractCalendars(Calendar.getInstance(), startTijd)));
+        return substractCalendars(loopTijd, substractCalendars(Calendar.getInstance(), startTijd));
+//        Calendar cal = getGebruikteTijd();
+//        Date dif = new Date(cal.getTime().getTime() - loopTijd.getTime().getTime());
+//        Calendar cal2 = Calendar.getInstance();
+//        cal2.setTime(dif);
+//        return cal2;
+    }
+
+    private Calendar substractCalendars(Calendar cal1, Calendar cal2) {
+        Calendar cal3 = Calendar.getInstance();
+        Date dif = new Date(cal1.getTime().getTime() - cal2.getTime().getTime());
+        cal3.setTime(dif);
+        return cal3;
     }
 
     /**
@@ -94,9 +109,9 @@ public class Toetsdeelname {
         }
         System.out.println("Toets wordt ingeleverd...");
     }
-
+    
     private boolean isErNogTijdOver() {
-        return getTijdOver().getTimeInMillis() > 0;
+        return getTijdOver().getTime().getYear() > 69;
     }
 
     public void verhoogScore(int s){
