@@ -73,9 +73,13 @@ public class Toetsuitvoering implements Runnable {
      * @param naam de naam van de student die wil deelnemen aan de toets
      */
     public void voegDeelnemerToe(String naam){
-        Toetsdeelname t = new Toetsdeelname(Calendar.getInstance(), looptijdStudent, kennistoets);
-        t.voegDeelnemerToe(naam);
-        toetsDeelnames.add(t);
+        if(toetsDeelnames.size() < 50) {
+            Toetsdeelname t = new Toetsdeelname(Calendar.getInstance(), looptijdStudent, kennistoets);
+            t.voegDeelnemerToe(naam);
+            toetsDeelnames.add(t);
+        }
+        else
+            System.out.println("Het lokaal is vol");
     }
 
     /**
