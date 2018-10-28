@@ -1,8 +1,9 @@
 package nl.erikruud;
 
 import java.util.*;
+import java.util.Observable;
 
-public class Toetsdeelname {
+public class Toetsdeelname implements Observer {
     private Calendar startTijd;
     private Calendar loopTijd;
     private String studentNaam;
@@ -161,5 +162,10 @@ public class Toetsdeelname {
     public void laatToetsVerlopen() {
         toetsNogOpen = false;
         System.out.println("toets verlopen");
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        laatToetsVerlopen();
     }
 }

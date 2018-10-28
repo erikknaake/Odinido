@@ -1,13 +1,11 @@
 package nl.erikruud;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
+import java.util.*;
 
 /**
  * Een toetsuitvoering is de uitvoering van een willekeurige toets binnen een lokaal
  */
-public class Toetsuitvoering implements Runnable {
+public class Toetsuitvoering extends Observable implements Runnable {
     private Calendar startTijd;
     private Calendar looptijd;
     private Calendar looptijdStudent;
@@ -77,6 +75,7 @@ public class Toetsuitvoering implements Runnable {
             Toetsdeelname t = new Toetsdeelname(Calendar.getInstance(), looptijdStudent, kennistoets);
             t.voegDeelnemerToe(naam);
             toetsDeelnames.add(t);
+            addObserver(t);
         }
         else
             System.out.println("Het lokaal is vol");
@@ -101,9 +100,7 @@ public class Toetsuitvoering implements Runnable {
                 e.printStackTrace();
             }
         }
-        for(Toetsdeelname t : toetsDeelnames) {
-            t.laatToetsVerlopen();
-        }
+        notifyObservers();
     }
 
     private boolean toetsLooptNog() {
