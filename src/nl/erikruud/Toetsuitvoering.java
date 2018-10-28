@@ -100,9 +100,14 @@ public class Toetsuitvoering extends Observable implements Runnable {
                 e.printStackTrace();
             }
         }
+        setChanged();
         notifyObservers();
     }
 
+    /**
+     * Controleert of de duur dat een toets open mag staan is verstreken
+     * @return of de toets nog open staat
+     */
     private boolean toetsLooptNog() {
         return CalendarUtils.isCalGroterDanEpoch(CalendarUtils.substractCalendars(looptijd, CalendarUtils.substractCalendars(Calendar.getInstance(), startTijd)));
     }
