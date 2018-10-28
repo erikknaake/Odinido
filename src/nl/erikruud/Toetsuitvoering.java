@@ -73,9 +73,9 @@ public class Toetsuitvoering extends Observable implements Runnable {
     public void voegDeelnemerToe(String naam){
         if(toetsDeelnames.size() < 50) {
             Toetsdeelname t = new Toetsdeelname(Calendar.getInstance(), looptijdStudent, kennistoets);
+            addObserver(t);
             t.voegDeelnemerToe(naam);
             toetsDeelnames.add(t);
-            addObserver(t);
         }
         else
             System.out.println("Het lokaal is vol");
@@ -95,13 +95,13 @@ public class Toetsuitvoering extends Observable implements Runnable {
         while(toetsLooptNog()) {
             try {
                 Thread.sleep(200);
-            }
-            catch (InterruptedException e) {
+            } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
         setChanged();
         notifyObservers();
+        clearChanged();
     }
 
     /**
